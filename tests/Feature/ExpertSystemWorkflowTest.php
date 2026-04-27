@@ -68,6 +68,8 @@ class ExpertSystemWorkflowTest extends TestCase
         $response->assertSuccessful();
         $response->assertSessionHasNoErrors();
         $response->assertSee('SMA Uji');
+        $response->assertSee('Jalan Mawar No. 7');
+        $response->assertSee('08123456789');
         $response->assertSee('Konflik keluarga');
         $this->assertResponseContainsAnyText($response->getContent(), [
             'hasil',
@@ -268,6 +270,37 @@ class ExpertSystemWorkflowTest extends TestCase
         $this->assertSame(['P02' => 0.976, 'Theta' => 0.024], $result['masses']);
     }
 
+    public function test_database_seed_matches_bab_three_symptom_table(): void
+    {
+        $this->seed();
+
+        $expectedSymptoms = [
+            'G01' => ['Tindakan ingin bunuh diri', 0.8],
+            'G02' => ['Malas berkomunikasi', 0.3],
+            'G03' => ['Menarik diri dari keluarga', 0.6],
+            'G04' => ['Mudah marah', 0.5],
+            'G05' => ['Sulit berpikir jernih', 0.5],
+            'G06' => ['Tidak memiliki nafsu makan', 0.3],
+            'G07' => ['Aktivitas terganggu', 0.3],
+            'G08' => ['Overtinhking', 0.5],
+            'G09' => ['Merasa cemas berlebih', 0.4],
+            'G10' => ['Tidak memiliki rasa percaya diri', 0.3],
+            'G11' => ['Sulit tidur', 0.4],
+            'G12' => ['Mudah takut', 0.2],
+            'G13' => ['Sering menderita sakit kepala', 0.3],
+            'G14' => ['Sedih berkepanjangan', 0.4],
+            'G15' => ['Merasa tidak bahagia', 0.5],
+        ];
+
+        foreach ($expectedSymptoms as $code => [$name, $belief]) {
+            $this->assertDatabaseHas('symptoms', [
+                'code' => $code,
+                'name' => $name,
+                'belief' => $belief,
+            ]);
+        }
+    }
+
     private function routeUrl(string $name, array $parameters = []): string
     {
         if (! Route::has($name)) {
@@ -326,6 +359,8 @@ class ExpertSystemWorkflowTest extends TestCase
             'name' => 'Remaja Uji',
             'age' => 16,
             'gender' => 'female',
+            'address' => 'Jalan Mawar No. 7',
+            'phone' => '08123456789',
             'school' => 'SMA Uji',
             'parent_guardian' => 'Wali Uji',
             'family_stressor' => 'konflik',

@@ -305,6 +305,8 @@ class ConsultationController extends Controller
             'respondent_name' => $patient['name'],
             'respondent_age' => $patient['age'] ?? null,
             'respondent_gender' => $patient['gender'],
+            'respondent_address' => $patient['address'],
+            'respondent_phone' => $patient['phone'],
             'started_at' => now(),
             'completed_at' => now(),
             'detected_mental_disorder_id' => $disorderId,
@@ -366,6 +368,8 @@ class ConsultationController extends Controller
             'respondent_name' => $patient['name'],
             'respondent_age' => $patient['age'] ?? null,
             'respondent_gender' => $patient['gender'],
+            'respondent_address' => $patient['address'],
+            'respondent_phone' => $patient['phone'],
             'gender' => $patient['gender'],
             'address' => $patient['address'],
             'phone' => $patient['phone'],
@@ -612,11 +616,10 @@ class ConsultationController extends Controller
         }
 
         return match (true) {
-            $score >= 0.8 => 'Sangat kuat',
-            $score >= 0.6 => 'Kuat',
-            $score >= 0.4 => 'Cukup',
-            $score > 0 => 'Rendah',
-            default => 'Tidak terdeteksi',
+            $score >= 1.0 => 'Sangat Pasti',
+            $score >= 0.75 => 'Pasti',
+            $score >= 0.50 => 'Cukup Pasti',
+            default => 'Kurang Pasti',
         };
     }
 
@@ -626,8 +629,6 @@ class ConsultationController extends Controller
     private function patientNotes(array $patient): ?string
     {
         $notes = collect([
-            'Alamat' => $patient['address'] ?? null,
-            'Telepon' => $patient['phone'] ?? null,
             'Sekolah' => $patient['school'] ?? null,
             'Orang tua/wali' => $patient['parent_guardian'] ?? null,
             'Pemicu stres' => $this->familyStressorLabel($patient['family_stressor'] ?? null),

@@ -14,6 +14,8 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
     'respondent_name',
     'respondent_age',
     'respondent_gender',
+    'respondent_address',
+    'respondent_phone',
     'started_at',
     'completed_at',
     'detected_mental_disorder_id',
@@ -87,6 +89,16 @@ class Consultation extends Model
     public function getGenderAttribute(): ?string
     {
         return $this->respondent_gender;
+    }
+
+    public function getAddressAttribute(): ?string
+    {
+        return $this->respondent_address ?? $this->noteValue('Alamat');
+    }
+
+    public function getPhoneAttribute(): ?string
+    {
+        return $this->respondent_phone ?? $this->noteValue('Telepon');
     }
 
     public function getSchoolAttribute(): ?string

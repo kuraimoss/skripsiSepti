@@ -45,6 +45,18 @@
                         </div>
 
                         <div>
+                            <label for="phone" class="block text-sm font-semibold text-slate-700">Telepon</label>
+                            <input id="phone" name="phone" value="{{ old('phone') }}" type="text" inputmode="tel" class="mt-2 block w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-sm text-slate-950 shadow-sm transition placeholder:text-slate-400 focus:border-teal-600 focus:ring-2 focus:ring-teal-600/20" placeholder="Opsional">
+                            @error('phone') <p class="mt-2 text-sm text-rose-700">{{ $message }}</p> @enderror
+                        </div>
+
+                        <div class="md:col-span-2">
+                            <label for="address" class="block text-sm font-semibold text-slate-700">Alamat</label>
+                            <textarea id="address" name="address" rows="2" class="mt-2 block w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-sm text-slate-950 shadow-sm transition placeholder:text-slate-400 focus:border-teal-600 focus:ring-2 focus:ring-teal-600/20" placeholder="Opsional">{{ old('address') }}</textarea>
+                            @error('address') <p class="mt-2 text-sm text-rose-700">{{ $message }}</p> @enderror
+                        </div>
+
+                        <div>
                             <label for="school" class="block text-sm font-semibold text-slate-700">Sekolah / institusi</label>
                             <input id="school" name="school" value="{{ old('school') }}" type="text" class="mt-2 block w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-sm text-slate-950 shadow-sm transition placeholder:text-slate-400 focus:border-teal-600 focus:ring-2 focus:ring-teal-600/20" placeholder="Opsional">
                             @error('school') <p class="mt-2 text-sm text-rose-700">{{ $message }}</p> @enderror

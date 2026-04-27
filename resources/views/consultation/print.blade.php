@@ -65,6 +65,8 @@
                         <div class="flex justify-between gap-4"><dt>Nama</dt><dd class="font-semibold">{{ data_get($consultation ?? null, 'patient_name', '-') }}</dd></div>
                         <div class="flex justify-between gap-4"><dt>Usia</dt><dd class="font-semibold">{{ data_get($consultation ?? null, 'age', '-') }}</dd></div>
                         <div class="flex justify-between gap-4"><dt>Jenis kelamin</dt><dd class="font-semibold">{{ data_get($consultation ?? null, 'gender', '-') }}</dd></div>
+                        <div class="flex justify-between gap-4"><dt>Telepon</dt><dd class="font-semibold">{{ data_get($consultation ?? null, 'phone', '-') }}</dd></div>
+                        <div class="flex justify-between gap-4"><dt>Alamat</dt><dd class="font-semibold">{{ data_get($consultation ?? null, 'address', '-') }}</dd></div>
                         <div class="flex justify-between gap-4"><dt>Sekolah</dt><dd class="font-semibold">{{ data_get($consultation ?? null, 'school', '-') }}</dd></div>
                         <div class="flex justify-between gap-4"><dt>Orang tua/wali</dt><dd class="font-semibold">{{ data_get($consultation ?? null, 'parent_guardian', '-') }}</dd></div>
                     </dl>

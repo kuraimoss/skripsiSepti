@@ -58,6 +58,14 @@
                     <dd class="mt-1 text-sm font-medium text-slate-950">{{ data_get($consultation ?? null, 'gender', '-') }}</dd>
                 </div>
                 <div>
+                    <dt class="text-xs font-semibold uppercase tracking-wide text-slate-500">Telepon</dt>
+                    <dd class="mt-1 text-sm font-medium text-slate-950">{{ data_get($consultation ?? null, 'phone', '-') }}</dd>
+                </div>
+                <div class="sm:col-span-2">
+                    <dt class="text-xs font-semibold uppercase tracking-wide text-slate-500">Alamat</dt>
+                    <dd class="mt-1 text-sm leading-6 text-slate-700">{{ data_get($consultation ?? null, 'address', '-') }}</dd>
+                </div>
+                <div>
                     <dt class="text-xs font-semibold uppercase tracking-wide text-slate-500">Sekolah</dt>
                     <dd class="mt-1 text-sm font-medium text-slate-950">{{ data_get($consultation ?? null, 'school', '-') }}</dd>
                 </div>

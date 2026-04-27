@@ -14,7 +14,7 @@
 /.vscode
 /.zed
 /auth.json
-/document_evidence_output
+/document_evidence_output*
 /node_modules
 /public/build
 /public/hot

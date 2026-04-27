@@ -48,6 +48,8 @@ return new class extends Migration
             $table->string('respondent_name')->nullable();
             $table->unsignedTinyInteger('respondent_age')->nullable();
             $table->string('respondent_gender', 20)->nullable();
+            $table->text('respondent_address')->nullable();
+            $table->string('respondent_phone', 30)->nullable();
             $table->timestamp('started_at')->nullable();
             $table->timestamp('completed_at')->nullable();
             $table->foreignId('detected_mental_disorder_id')->nullable()->constrained('mental_disorders')->nullOnDelete();

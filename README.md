@@ -8,7 +8,7 @@ Aplikasi web Laravel untuk deteksi awal gangguan kesehatan mental remaja akibat 
 - Laravel 13
 - PHPUnit 12
 - Vite 8 + Tailwind CSS 4
-- Database: MySQL/MariaDB via XAMPP, sesuai Bab 2 skripsi
+- Database: MySQL via XAMPP, sesuai Bab 2 skripsi
 
 ## Setup
 

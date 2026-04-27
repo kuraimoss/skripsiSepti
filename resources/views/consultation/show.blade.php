@@ -90,6 +90,18 @@
                             <dd class="mt-1 text-sm font-medium text-slate-950">{{ data_get($consultation ?? null, 'age', '-') }}</dd>
                         </div>
                         <div>
+                            <dt class="text-xs font-semibold text-slate-500">Jenis kelamin</dt>
+                            <dd class="mt-1 text-sm font-medium text-slate-950">{{ data_get($consultation ?? null, 'gender', '-') }}</dd>
+                        </div>
+                        <div>
+                            <dt class="text-xs font-semibold text-slate-500">Telepon</dt>
+                            <dd class="mt-1 text-sm font-medium text-slate-950">{{ data_get($consultation ?? null, 'phone', '-') }}</dd>
+                        </div>
+                        <div class="sm:col-span-2">
+                            <dt class="text-xs font-semibold text-slate-500">Alamat</dt>
+                            <dd class="mt-1 text-sm leading-6 text-slate-950">{{ data_get($consultation ?? null, 'address', '-') }}</dd>
+                        </div>
+                        <div>
                             <dt class="text-xs font-semibold text-slate-500">Pemicu</dt>
                             <dd class="mt-1 text-sm font-medium text-slate-950">{{ data_get($consultation ?? null, 'family_stressor', '-') }}</dd>
                         </div>
