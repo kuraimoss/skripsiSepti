@@ -1,0 +1,77 @@
+@import 'tailwindcss';
+
+@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
+@source '../../storage/framework/views/*.php';
+@source '../**/*.blade.php';
+@source '../**/*.js';
+
+@theme {
+    --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
+        'Segoe UI Symbol', 'Noto Color Emoji';
+
+    --color-teal-50: #f1ecfa;
+    --color-teal-100: #ece6f7;
+    --color-teal-200: #dcd2ef;
+    --color-teal-300: #b8a9e0;
+    --color-teal-400: #a495d3;
+    --color-teal-500: #8e7cc3;
+    --color-teal-600: #7f6db5;
+    --color-teal-700: #8e7cc3;
+    --color-teal-800: #6f5fa1;
+    --color-teal-900: #5b4b86;
+    --color-teal-950: #2d2a32;
+
+    --color-slate-50: #fbfaff;
+    --color-slate-100: #f1ecfa;
+    --color-slate-200: #e5dff0;
+    --color-slate-300: #d4cce0;
+    --color-slate-400: #9d94ad;
+    --color-slate-500: #706a7c;
+    --color-slate-600: #5a5363;
+    --color-slate-700: #47414f;
+    --color-slate-800: #36313c;
+    --color-slate-900: #2d2a32;
+    --color-slate-950: #2d2a32;
+
+    --color-amber-50: #f8f5fc;
+    --color-amber-100: #f1ecfa;
+    --color-amber-200: #dcd2ef;
+    --color-amber-800: #6f5fa1;
+    --color-amber-900: #2d2a32;
+}
+
+@layer base {
+    html {
+        scroll-behavior: smooth;
+    }
+
+    body {
+        background: #ffffff;
+        color: #2d2a32;
+        text-rendering: optimizeLegibility;
+    }
+
+    :focus-visible {
+        outline: 3px solid color-mix(in oklab, #8e7cc3 55%, transparent);
+        outline-offset: 3px;
+    }
+}
+
+@media print {
+    @page {
+        margin: 16mm;
+    }
+
+    .no-print {
+        display: none !important;
+    }
+
+    .print-break-inside-avoid {
+        break-inside: avoid;
+    }
+
+    body {
+        background: #fff !important;
+        color: #0f172a !important;
+    }
+}
