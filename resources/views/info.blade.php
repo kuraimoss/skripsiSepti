@@ -16,8 +16,7 @@
             <div class="mt-8 grid gap-4 lg:grid-cols-3">
                 @forelse ($disorders as $disorder)
                     <article class="rounded-lg border border-slate-200 bg-white p-5">
-                        <p class="text-xs font-semibold text-slate-500">{{ data_get($disorder, 'code', '-') }}</p>
-                        <h2 class="mt-2 text-lg font-semibold text-slate-950">{{ data_get($disorder, 'name') }}</h2>
+                        <h2 class="text-lg font-semibold text-slate-950">{{ data_get($disorder, 'name') }}</h2>
                         @if (filled(data_get($disorder, 'scientific_name')))
                             <p class="mt-1 text-sm text-slate-500">{{ data_get($disorder, 'scientific_name') }}</p>
                         @endif

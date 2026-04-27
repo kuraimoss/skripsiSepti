@@ -66,13 +66,11 @@
                                     @foreach ($items as $symptom)
                                         @php
                                             $value = (string) data_get($symptom, 'id', data_get($symptom, 'code'));
-                                            $code = data_get($symptom, 'code', $value);
                                         @endphp
                                         <label class="flex min-h-16 cursor-pointer gap-3 rounded-md border border-slate-200 bg-slate-50 p-3 transition hover:border-teal-300 hover:bg-teal-50">
                                             <input type="checkbox" name="symptoms[]" value="{{ $value }}" @checked(in_array($value, $selectedSymptoms, true)) class="mt-1 size-4 rounded border-slate-300 text-teal-700 focus:ring-teal-600">
                                             <span>
-                                                <span class="block text-xs font-semibold text-slate-500">{{ $code }}</span>
-                                                <span class="mt-1 block text-sm font-medium leading-5 text-slate-900">{{ data_get($symptom, 'name', data_get($symptom, 'description')) }}</span>
+                                                <span class="block text-sm font-medium leading-5 text-slate-900">{{ data_get($symptom, 'name', data_get($symptom, 'description')) }}</span>
                                             </span>
                                         </label>
                                     @endforeach

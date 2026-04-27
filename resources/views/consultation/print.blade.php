@@ -87,7 +87,6 @@
                 <div class="mt-3 flex items-start justify-between gap-4">
                     <div>
                         <h2 class="text-xl font-semibold">{{ data_get($primaryResult, 'disorder.name', data_get($primaryResult, 'name', 'Hasil belum tersedia')) }}</h2>
-                        <p class="mt-1 text-sm text-slate-600">Kode: {{ data_get($primaryResult, 'disorder.code', data_get($primaryResult, 'code', '-')) }}</p>
                     </div>
                     <div class="text-right">
                         <p class="text-xl font-semibold">{{ $formatPercent($confidence) }}</p>
@@ -104,7 +103,6 @@
                         <thead class="bg-slate-100">
                             <tr>
                                 <th class="px-4 py-3 text-left font-semibold">Gangguan</th>
-                                <th class="px-4 py-3 text-left font-semibold">Kode</th>
                                 <th class="px-4 py-3 text-left font-semibold">Belief</th>
                                 <th class="px-4 py-3 text-left font-semibold">Plausibility</th>
                             </tr>
@@ -113,12 +111,11 @@
                             @forelse ($results as $result)
                                 <tr>
                                     <td class="px-4 py-3">{{ data_get($result, 'disorder.name', data_get($result, 'name', '-')) }}</td>
-                                    <td class="px-4 py-3">{{ data_get($result, 'disorder.code', data_get($result, 'code', '-')) }}</td>
                                     <td class="px-4 py-3">{{ $formatPercent(data_get($result, 'belief', data_get($result, 'confidence', data_get($result, 'percentage', 0)))) }}</td>
                                     <td class="px-4 py-3">{{ data_get($result, 'plausibility') !== null ? $formatPercent(data_get($result, 'plausibility')) : '-' }}</td>
                                 </tr>
                             @empty
-                                <tr><td colspan="4" class="px-4 py-4 text-slate-500">Detail hasil belum tersedia.</td></tr>
+                                <tr><td colspan="3" class="px-4 py-4 text-slate-500">Detail hasil belum tersedia.</td></tr>
                             @endforelse
                         </tbody>
                     </table>
@@ -130,7 +127,7 @@
                     <h2 class="text-base font-semibold">Gejala terpilih</h2>
                     <ul class="mt-3 space-y-2 text-sm leading-6">
                         @forelse ($selectedSymptoms as $symptom)
-                            <li class="rounded-md border border-slate-200 px-3 py-2">{{ data_get($symptom, 'code', data_get($symptom, 'id', '-')) }} - {{ data_get($symptom, 'name', data_get($symptom, 'description', $symptom)) }}</li>
+                            <li class="rounded-md border border-slate-200 px-3 py-2">{{ data_get($symptom, 'name', data_get($symptom, 'description', $symptom)) }}</li>
                         @empty
                             <li class="text-slate-500">Tidak ada data gejala.</li>
                         @endforelse

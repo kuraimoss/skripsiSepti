@@ -24,9 +24,34 @@ class ExpertSystemWorkflowTest extends TestCase
 
     public function test_consultation_form_loads_when_route_exists(): void
     {
+        $this->seed();
+
         $response = $this->get($this->routeUrl('consultation.create'));
 
         $response->assertOk();
+        $response->assertDontSee('G01');
+        $response->assertDontSee('G08');
+    }
+
+    public function test_public_pages_do_not_show_symptom_or_disorder_codes(): void
+    {
+        $this->seed();
+
+        $this->get($this->routeUrl('info'))
+            ->assertOk()
+            ->assertDontSee('P01')
+            ->assertDontSee('P02');
+
+        $response = $this->followingRedirects()->post(
+            $this->routeUrl('consultation.store'),
+            $this->consultationPayload(),
+        );
+
+        $response->assertSuccessful();
+        $response->assertDontSee('G01');
+        $response->assertDontSee('G03');
+        $response->assertDontSee('P01');
+        $response->assertDontSee('P02');
     }
 
     public function test_consultation_submission_shows_a_result_when_route_exists(): void

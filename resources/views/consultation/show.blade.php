@@ -26,7 +26,6 @@
     $results = collect($results ?? data_get($consultation ?? null, 'results', []));
     $primaryResult = $primaryResult ?? data_get($consultation ?? null, 'primary_result') ?? $results->first();
     $primaryName = data_get($primaryResult, 'disorder.name', data_get($primaryResult, 'name', 'Hasil belum tersedia'));
-    $primaryCode = data_get($primaryResult, 'disorder.code', data_get($primaryResult, 'code', '-'));
     $confidence = data_get($primaryResult, 'belief', data_get($primaryResult, 'confidence', data_get($primaryResult, 'percentage', 0)));
     $selectedSymptoms = collect($selectedSymptoms ?? data_get($consultation ?? null, 'symptoms', []));
     $consultationId = data_get($consultation ?? null, 'id');
@@ -67,7 +66,6 @@
                     <div class="mt-4 flex items-start justify-between gap-4">
                         <div>
                             <h2 class="text-2xl font-semibold tracking-normal text-slate-950">{{ $primaryName }}</h2>
-                            <p class="mt-1 text-sm text-slate-600">Kode {{ $primaryCode }}</p>
                         </div>
                         <div class="text-right">
                             <span class="inline-flex rounded-md bg-white px-3 py-1 text-sm font-semibold text-teal-800">{{ $formatPercent($confidence) }}</span>
@@ -115,8 +113,7 @@
                     <div class="mt-4 grid gap-3 md:grid-cols-2">
                         @forelse ($selectedSymptoms as $symptom)
                             <div class="rounded-md border border-slate-200 bg-slate-50 p-3">
-                                <p class="text-xs font-semibold text-slate-500">{{ data_get($symptom, 'code', data_get($symptom, 'id', '-')) }}</p>
-                                <p class="mt-1 text-sm leading-5 text-slate-900">{{ data_get($symptom, 'name', data_get($symptom, 'description', $symptom)) }}</p>
+                                <p class="text-sm leading-5 text-slate-900">{{ data_get($symptom, 'name', data_get($symptom, 'description', $symptom)) }}</p>
                             </div>
                         @empty
                             <p class="text-sm text-slate-500">Gejala terpilih belum tersedia.</p>
