@@ -4,7 +4,7 @@
     <section class="bg-white">
         <div class="mx-auto grid min-h-[calc(100vh-160px)] max-w-5xl items-center gap-8 px-4 py-12 sm:px-6 lg:grid-cols-[0.9fr_1.1fr] lg:px-8">
             <div>
-                <img src="{{ asset('images/admin-login.svg') }}" alt="Ilustrasi akses aman panel admin" class="mb-6 w-full rounded-lg border border-slate-200 bg-slate-50 object-cover shadow-sm">
+            <img src="{{ asset('images/admin-login.jpg') }}" alt="Tenaga kesehatan memeriksa catatan pasien" class="mb-6 w-full rounded-lg border border-slate-200 bg-slate-50 object-cover shadow-sm">
                 <p class="flex items-center gap-2 text-sm font-semibold text-teal-700">
                     <x-icon name="shield-check" class="size-4" />
                     Panel Admin

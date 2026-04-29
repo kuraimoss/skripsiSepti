@@ -24,7 +24,7 @@
         </div>
 
         <div class="self-center space-y-4">
-            <img src="{{ asset('images/landing-hero.svg') }}" alt="Ilustrasi remaja mengikuti konsultasi kesehatan mental awal" class="w-full rounded-lg border border-slate-200 bg-slate-50 object-cover shadow-sm">
+                <img src="{{ asset('images/landing-hero.jpg') }}" alt="Remaja mengikuti sesi konsultasi kesehatan mental dengan terapis" class="w-full rounded-lg border border-slate-200 bg-slate-50 object-cover shadow-sm">
 
             <div class="rounded-lg border border-slate-200 bg-slate-50 p-6">
                 <p class="flex items-center gap-2 text-sm font-semibold text-slate-950">

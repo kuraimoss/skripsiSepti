@@ -149,7 +149,7 @@
 
                 <section class="rounded-lg border border-slate-200 bg-slate-50 p-5">
                     <div class="grid gap-5 sm:grid-cols-[140px_1fr] sm:items-center">
-                        <img src="{{ asset('images/result-summary.svg') }}" alt="Ilustrasi ringkasan hasil konsultasi" class="w-full rounded-md border border-slate-200 bg-white object-cover">
+                <img src="{{ asset('images/result-summary.jpg') }}" alt="Dokumen medis untuk ringkasan hasil konsultasi" class="w-full rounded-md border border-slate-200 bg-white object-cover">
                         <div>
                             <h2 class="flex items-center gap-2 text-base font-semibold text-slate-950">
                                 <x-icon name="heart-handshake" class="size-5 text-teal-700" />

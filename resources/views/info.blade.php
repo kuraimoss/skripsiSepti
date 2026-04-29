@@ -16,7 +16,7 @@
                     <h1 class="mt-3 text-3xl font-semibold tracking-normal text-slate-950">Data gangguan yang dipakai sistem.</h1>
                     <p class="mt-3 text-sm leading-6 text-slate-600">Ringkasan singkat dari basis pengetahuan. Hasil sistem tetap perlu ditinjau tenaga profesional.</p>
                 </div>
-                <img src="{{ asset('images/info-disorders.svg') }}" alt="Ilustrasi kartu informasi gangguan pada sistem pakar" class="w-full rounded-lg border border-slate-200 bg-slate-50 object-cover shadow-sm">
+            <img src="{{ asset('images/info-disorders.jpg') }}" alt="Materi edukasi mental health pada laptop" class="w-full rounded-lg border border-slate-200 bg-slate-50 object-cover shadow-sm">
             </div>
 
             <div class="mt-8 grid gap-4 lg:grid-cols-3">
