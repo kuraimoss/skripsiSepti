@@ -46,7 +46,13 @@
     </div>
 
     <div class="flex flex-col-reverse gap-3 border-t border-slate-200 pt-5 sm:flex-row sm:justify-end">
-        <a href="{{ \Illuminate\Support\Facades\Route::has('admin.symptoms.index') ? route('admin.symptoms.index') : '#' }}" class="inline-flex justify-center rounded-md border border-slate-300 px-4 py-2 text-sm font-semibold text-slate-700 transition hover:bg-slate-100">Batal</a>
-        <button type="submit" class="inline-flex justify-center rounded-md bg-teal-700 px-4 py-2 text-sm font-semibold text-white transition hover:bg-teal-800">Simpan Gejala</button>
+        <a href="{{ \Illuminate\Support\Facades\Route::has('admin.symptoms.index') ? route('admin.symptoms.index') : '#' }}" class="inline-flex items-center justify-center gap-2 rounded-md border border-slate-300 px-4 py-2 text-sm font-semibold text-slate-700 transition hover:bg-slate-100">
+            <x-icon name="arrow-right" class="size-4 rotate-180" />
+            Batal
+        </a>
+        <button type="submit" class="inline-flex items-center justify-center gap-2 rounded-md bg-teal-700 px-4 py-2 text-sm font-semibold text-white transition hover:bg-teal-800">
+            <x-icon name="check-circle" class="size-4" />
+            Simpan Gejala
+        </button>
     </div>
 </form>

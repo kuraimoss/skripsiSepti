@@ -4,7 +4,11 @@
     <section class="bg-white">
         <div class="mx-auto grid min-h-[calc(100vh-160px)] max-w-5xl items-center gap-8 px-4 py-12 sm:px-6 lg:grid-cols-[0.9fr_1.1fr] lg:px-8">
             <div>
-                <p class="text-sm font-semibold text-teal-700">Panel Admin</p>
+                <img src="{{ asset('images/admin-login.svg') }}" alt="Ilustrasi akses aman panel admin" class="mb-6 w-full rounded-lg border border-slate-200 bg-slate-50 object-cover shadow-sm">
+                <p class="flex items-center gap-2 text-sm font-semibold text-teal-700">
+                    <x-icon name="shield-check" class="size-4" />
+                    Panel Admin
+                </p>
                 <h1 class="mt-3 max-w-xl text-3xl font-semibold leading-tight tracking-normal text-slate-950">Masuk untuk mengelola sistem.</h1>
                 <p class="mt-4 max-w-xl text-sm leading-6 text-slate-600">Gunakan akun admin yang tersedia di database.</p>
             </div>
@@ -29,7 +33,8 @@
                     Ingat sesi login
                 </label>
 
-                <button type="submit" class="mt-6 inline-flex w-full items-center justify-center rounded-md bg-teal-700 px-4 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-teal-800">
+                <button type="submit" class="mt-6 inline-flex w-full items-center justify-center gap-2 rounded-md bg-teal-700 px-4 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-teal-800">
+                    <x-icon name="log-in" class="size-4" />
                     Masuk Admin
                 </button>
             </form>

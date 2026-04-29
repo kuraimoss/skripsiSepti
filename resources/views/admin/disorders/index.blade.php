@@ -11,7 +11,8 @@
 @endphp
 
 @section('header_actions')
-    <a href="{{ $createUrl }}" class="inline-flex items-center justify-center rounded-md bg-teal-700 px-4 py-2 text-sm font-semibold text-white transition hover:bg-teal-800">
+    <a href="{{ $createUrl }}" class="inline-flex items-center justify-center gap-2 rounded-md bg-teal-700 px-4 py-2 text-sm font-semibold text-white transition hover:bg-teal-800">
+        <x-icon name="plus" class="size-4" />
         Tambah Gangguan
     </a>
 @endsection
@@ -19,7 +20,10 @@
 @section('content')
     <form method="GET" action="{{ $indexUrl }}" class="mb-5 grid gap-3 rounded-lg border border-slate-200 bg-white p-4 shadow-sm md:grid-cols-[1fr_auto]">
         <input type="search" name="search" value="{{ request('search') }}" class="rounded-md border border-slate-300 bg-white px-3 py-2 text-sm shadow-sm focus:border-teal-600 focus:ring-2 focus:ring-teal-600/20" placeholder="Cari kode atau nama gangguan">
-        <button type="submit" class="rounded-md border border-slate-300 bg-slate-50 px-4 py-2 text-sm font-semibold text-slate-700 transition hover:bg-slate-100">Filter</button>
+        <button type="submit" class="inline-flex items-center justify-center gap-2 rounded-md border border-slate-300 bg-slate-50 px-4 py-2 text-sm font-semibold text-slate-700 transition hover:bg-slate-100">
+            <x-icon name="filter" class="size-4" />
+            Filter
+        </button>
     </form>
 
     <section class="overflow-hidden rounded-lg border border-slate-200 bg-white shadow-sm">
@@ -51,11 +55,17 @@
                             <td class="px-5 py-4 text-slate-600">{{ \Illuminate\Support\Str::limit(data_get($disorder, 'solution', '-'), 80) }}</td>
                             <td class="px-5 py-4">
                                 <div class="flex justify-end gap-2">
-                                    <a href="{{ $editUrl }}" class="rounded-md border border-slate-300 px-3 py-1.5 text-xs font-semibold text-slate-700 transition hover:bg-slate-100">Edit</a>
+                                    <a href="{{ $editUrl }}" class="inline-flex items-center gap-1.5 rounded-md border border-slate-300 px-3 py-1.5 text-xs font-semibold text-slate-700 transition hover:bg-slate-100">
+                                        <x-icon name="edit-3" class="size-3.5" />
+                                        Edit
+                                    </a>
                                     <form method="POST" action="{{ $deleteUrl }}" onsubmit="return confirm('Hapus gangguan ini?')">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" class="rounded-md border border-rose-200 px-3 py-1.5 text-xs font-semibold text-rose-700 transition hover:bg-rose-50">Hapus</button>
+                                        <button type="submit" class="inline-flex items-center gap-1.5 rounded-md border border-rose-200 px-3 py-1.5 text-xs font-semibold text-rose-700 transition hover:bg-rose-50">
+                                            <x-icon name="trash-2" class="size-3.5" />
+                                            Hapus
+                                        </button>
                                     </form>
                                 </div>
                             </td>

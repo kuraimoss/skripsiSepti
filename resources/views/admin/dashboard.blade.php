@@ -6,22 +6,35 @@
 
 @php
     $stats = collect($stats ?? [
-        ['label' => 'Total gejala', 'value' => data_get($summary ?? [], 'symptoms_count', 0), 'tone' => 'teal'],
-        ['label' => 'Total gangguan', 'value' => data_get($summary ?? [], 'disorders_count', 0), 'tone' => 'slate'],
-        ['label' => 'Aturan aktif', 'value' => data_get($summary ?? [], 'rules_count', 0), 'tone' => 'amber'],
-        ['label' => 'Konsultasi', 'value' => data_get($summary ?? [], 'consultations_count', 0), 'tone' => 'rose'],
+        ['label' => 'Total gejala', 'value' => data_get($summary ?? [], 'symptoms_count', 0), 'tone' => 'teal', 'icon' => 'activity'],
+        ['label' => 'Total gangguan', 'value' => data_get($summary ?? [], 'disorders_count', 0), 'tone' => 'slate', 'icon' => 'brain'],
+        ['label' => 'Aturan aktif', 'value' => data_get($summary ?? [], 'rules_count', 0), 'tone' => 'amber', 'icon' => 'network'],
+        ['label' => 'Konsultasi', 'value' => data_get($summary ?? [], 'consultations_count', 0), 'tone' => 'rose', 'icon' => 'history'],
     ]);
     $recentConsultations = collect($recentConsultations ?? []);
     $topDisorders = collect($topDisorders ?? []);
 @endphp
 
 @section('header_actions')
-    <a href="{{ \Illuminate\Support\Facades\Route::has('admin.knowledge-rules.create') ? route('admin.knowledge-rules.create') : '#' }}" class="inline-flex items-center justify-center rounded-md bg-teal-700 px-4 py-2 text-sm font-semibold text-white transition hover:bg-teal-800">
+    <a href="{{ \Illuminate\Support\Facades\Route::has('admin.knowledge-rules.create') ? route('admin.knowledge-rules.create') : '#' }}" class="inline-flex items-center justify-center gap-2 rounded-md bg-teal-700 px-4 py-2 text-sm font-semibold text-white transition hover:bg-teal-800">
+        <x-icon name="plus" class="size-4" />
         Tambah Aturan
     </a>
 @endsection
 
 @section('content')
+    <section class="mb-6 grid gap-6 rounded-lg border border-slate-200 bg-white p-5 shadow-sm lg:grid-cols-[1fr_320px] lg:items-center">
+        <div>
+            <p class="flex items-center gap-2 text-sm font-semibold text-teal-700">
+                <x-icon name="layout-dashboard" class="size-4" />
+                Monitor sistem
+            </p>
+            <h2 class="mt-3 text-xl font-semibold tracking-normal text-slate-950">Pantau data sistem pakar dari satu panel.</h2>
+            <p class="mt-2 max-w-2xl text-sm leading-6 text-slate-600">Dashboard membantu admin melihat jumlah data utama, riwayat konsultasi, dan distribusi hasil tanpa masuk ke tiap menu satu per satu.</p>
+        </div>
+        <img src="{{ asset('images/admin-dashboard.svg') }}" alt="Ilustrasi dashboard admin sistem pakar" class="w-full rounded-md border border-slate-200 bg-slate-50 object-cover">
+    </section>
+
     <div class="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
         @foreach ($stats as $stat)
             @php
@@ -34,7 +47,12 @@
                 };
             @endphp
             <section class="rounded-lg border p-5 {{ $toneClass }}">
-                <p class="text-sm font-medium opacity-80">{{ data_get($stat, 'label') }}</p>
+                <div class="flex items-center justify-between gap-3">
+                    <p class="text-sm font-medium opacity-80">{{ data_get($stat, 'label') }}</p>
+                    <span class="grid size-9 place-items-center rounded-md bg-white/70">
+                        <x-icon :name="data_get($stat, 'icon', 'chart-bar')" class="size-5" />
+                    </span>
+                </div>
                 <p class="mt-3 text-3xl font-semibold tracking-normal">{{ data_get($stat, 'value', 0) }}</p>
                 @if (data_get($stat, 'note'))
                     <p class="mt-2 text-sm leading-6 opacity-75">{{ data_get($stat, 'note') }}</p>
@@ -47,10 +65,16 @@
         <section class="rounded-lg border border-slate-200 bg-white">
             <div class="flex items-center justify-between gap-4 border-b border-slate-200 p-5">
                 <div>
-                    <h2 class="text-base font-semibold text-slate-950">Konsultasi terbaru</h2>
+                    <h2 class="flex items-center gap-2 text-base font-semibold text-slate-950">
+                        <x-icon name="history" class="size-5 text-teal-700" />
+                        Konsultasi terbaru
+                    </h2>
                     <p class="mt-1 text-sm text-slate-500">Data terakhir yang masuk.</p>
                 </div>
-                <a href="{{ \Illuminate\Support\Facades\Route::has('admin.consultations.index') ? route('admin.consultations.index') : '#' }}" class="text-sm font-semibold text-teal-700 hover:text-teal-900">Lihat semua</a>
+                <a href="{{ \Illuminate\Support\Facades\Route::has('admin.consultations.index') ? route('admin.consultations.index') : '#' }}" class="inline-flex items-center gap-1 text-sm font-semibold text-teal-700 hover:text-teal-900">
+                    Lihat semua
+                    <x-icon name="arrow-right" class="size-4" />
+                </a>
             </div>
 
             <div class="overflow-x-auto">
@@ -84,7 +108,10 @@
         <section class="rounded-lg border border-slate-200 bg-white p-5">
             <div class="flex items-start justify-between gap-4">
                 <div>
-                    <h2 class="text-base font-semibold text-slate-950">Distribusi hasil</h2>
+                    <h2 class="flex items-center gap-2 text-base font-semibold text-slate-950">
+                        <x-icon name="chart-bar" class="size-5 text-teal-700" />
+                        Distribusi hasil
+                    </h2>
                     <p class="mt-1 text-sm text-slate-500">Gangguan yang paling sering muncul.</p>
                 </div>
             </div>

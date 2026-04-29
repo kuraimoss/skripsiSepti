@@ -160,7 +160,7 @@ http://127.0.0.1:8000
 Halaman admin:
 
 ```txt
-http://127.0.0.1:8000/admin/login
+http://127.0.0.1:8000/login
 ```
 
 Login admin memakai akun bawaan dari seeder.

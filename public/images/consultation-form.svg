@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 420" role="img" aria-labelledby="title desc">
+    <title id="title">Ilustrasi form konsultasi</title>
+    <desc id="desc">Form data pasien dan pilihan gejala untuk konsultasi awal.</desc>
+    <rect width="640" height="420" rx="28" fill="#FFFDFB"/>
+    <rect x="62" y="58" width="516" height="304" rx="30" fill="#F2EAE0"/>
+    <rect x="96" y="94" width="214" height="42" rx="12" fill="#FFFFFF" stroke="#E4DACF" stroke-width="3"/>
+    <rect x="96" y="154" width="214" height="42" rx="12" fill="#FFFFFF" stroke="#E4DACF" stroke-width="3"/>
+    <rect x="96" y="214" width="214" height="90" rx="12" fill="#FFFFFF" stroke="#E4DACF" stroke-width="3"/>
+    <rect x="350" y="96" width="194" height="38" rx="12" fill="#B4D3D9"/>
+    <rect x="350" y="154" width="194" height="38" rx="12" fill="#FFFFFF" stroke="#D8C5DF" stroke-width="3"/>
+    <rect x="350" y="212" width="194" height="38" rx="12" fill="#FFFFFF" stroke="#D8C5DF" stroke-width="3"/>
+    <rect x="350" y="270" width="130" height="40" rx="20" fill="#9B8EC7"/>
+    <path d="M374 115l12 12 28-30M374 173l12 12 28-30M374 231l12 12 28-30" stroke="#504373" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M126 116h118M126 176h150M126 238h132M126 270h104" stroke="#BDA6CE" stroke-width="10" stroke-linecap="round"/>
+    <circle cx="524" cy="324" r="46" fill="#BDA6CE"/>
+    <path d="M502 326l14 14 32-40" stroke="#FFFFFF" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 420" role="img" aria-labelledby="title desc">
+    <title id="title">Ilustrasi konsultasi kesehatan mental remaja</title>
+    <desc id="desc">Remaja duduk tenang dengan kartu konsultasi dan elemen visual sistem pakar.</desc>
+    <rect width="640" height="420" rx="28" fill="#F2EAE0"/>
+    <circle cx="508" cy="92" r="72" fill="#B4D3D9"/>
+    <circle cx="126" cy="320" r="82" fill="#BDA6CE" opacity=".65"/>
+    <rect x="78" y="72" width="484" height="276" rx="30" fill="#FFFDFB" stroke="#E4DACF" stroke-width="3"/>
+    <rect x="372" y="104" width="132" height="28" rx="14" fill="#B4D3D9"/>
+    <rect x="372" y="148" width="96" height="16" rx="8" fill="#D8C5DF"/>
+    <rect x="372" y="178" width="130" height="16" rx="8" fill="#D8C5DF"/>
+    <rect x="372" y="208" width="82" height="16" rx="8" fill="#D8C5DF"/>
+    <circle cx="242" cy="150" r="52" fill="#9B8EC7"/>
+    <path d="M168 302c10-76 48-116 74-116s64 40 74 116" fill="#BDA6CE"/>
+    <path d="M204 152c18 28 57 27 76 0v42c0 24-17 44-38 44s-38-20-38-44z" fill="#F7CFAF"/>
+    <path d="M197 142c8-42 38-62 75-38 19 12 24 30 17 53-21-16-57-9-92-15z" fill="#504373"/>
+    <rect x="196" y="252" width="92" height="72" rx="14" fill="#FFFDFB" stroke="#9B8EC7" stroke-width="3"/>
+    <path d="M214 280h56M214 302h40" stroke="#9B8EC7" stroke-width="8" stroke-linecap="round"/>
+    <path d="M104 112h92M104 142h62M104 172h78" stroke="#B4D3D9" stroke-width="10" stroke-linecap="round"/>
+    <path d="M430 282c22-28 58-28 80 0" stroke="#9B8EC7" stroke-width="14" stroke-linecap="round"/>
+    <circle cx="470" cy="242" r="28" fill="#F7CFAF"/>
+</svg>

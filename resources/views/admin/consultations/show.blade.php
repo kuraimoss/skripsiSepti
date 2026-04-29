@@ -35,7 +35,8 @@
 @endphp
 
 @section('header_actions')
-    <a href="{{ $printUrl }}" class="inline-flex items-center justify-center rounded-md border border-slate-300 bg-white px-4 py-2 text-sm font-semibold text-slate-700 transition hover:bg-slate-100">
+    <a href="{{ $printUrl }}" class="inline-flex items-center justify-center gap-2 rounded-md border border-slate-300 bg-white px-4 py-2 text-sm font-semibold text-slate-700 transition hover:bg-slate-100">
+        <x-icon name="printer" class="size-4" />
         Cetak
     </a>
 @endsection
@@ -43,7 +44,10 @@
 @section('content')
     <div class="grid gap-6 lg:grid-cols-[0.9fr_1.1fr]">
         <section class="rounded-lg border border-slate-200 bg-white p-5 shadow-sm">
-            <h2 class="text-base font-semibold text-slate-950">Identitas pasien</h2>
+            <h2 class="flex items-center gap-2 text-base font-semibold text-slate-950">
+                <x-icon name="user-round" class="size-5 text-teal-700" />
+                Identitas pasien
+            </h2>
             <dl class="mt-5 grid gap-4 sm:grid-cols-2">
                 <div>
                     <dt class="text-xs font-semibold uppercase tracking-wide text-slate-500">Nama</dt>
@@ -81,7 +85,10 @@
         </section>
 
         <section class="rounded-lg border border-teal-200 bg-teal-50 p-5 shadow-sm">
-            <p class="text-sm font-semibold uppercase tracking-wide text-teal-800">Hasil utama</p>
+            <p class="flex items-center gap-2 text-sm font-semibold uppercase tracking-wide text-teal-800">
+                <x-icon name="chart-bar" class="size-4" />
+                Hasil utama
+            </p>
             <div class="mt-4 flex items-start justify-between gap-4">
                 <div>
                     <h2 class="text-2xl font-semibold tracking-normal text-teal-950">{{ data_get($primaryResult, 'disorder.name', data_get($primaryResult, 'name', 'Hasil belum tersedia')) }}</h2>
@@ -99,7 +106,10 @@
     <div class="mt-6 grid gap-6 lg:grid-cols-[1.1fr_0.9fr]">
         <section class="rounded-lg border border-slate-200 bg-white shadow-sm">
             <div class="border-b border-slate-200 p-5">
-                <h2 class="text-base font-semibold text-slate-950">Detail hasil</h2>
+                <h2 class="flex items-center gap-2 text-base font-semibold text-slate-950">
+                    <x-icon name="clipboard-check" class="size-5 text-teal-700" />
+                    Detail hasil
+                </h2>
             </div>
             <div class="divide-y divide-slate-200">
                 @forelse ($results as $result)
@@ -125,7 +135,10 @@
         </section>
 
         <section class="rounded-lg border border-slate-200 bg-white p-5 shadow-sm">
-            <h2 class="text-base font-semibold text-slate-950">Gejala terpilih</h2>
+            <h2 class="flex items-center gap-2 text-base font-semibold text-slate-950">
+                <x-icon name="list-check" class="size-5 text-teal-700" />
+                Gejala terpilih
+            </h2>
             <div class="mt-4 space-y-3">
                 @forelse ($selectedSymptoms as $symptom)
                     <div class="rounded-md border border-slate-200 bg-slate-50 p-3">

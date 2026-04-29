@@ -2,10 +2,10 @@
     $appName = config('app.name', 'Sistem Pakar MentalCare');
     $pageTitle = trim(($title ?? '') . '');
     $publicNav = [
-        ['label' => 'Beranda', 'route' => 'home', 'fallback' => url('/')],
-        ['label' => 'Konsultasi', 'route' => 'consultation.create', 'fallback' => '#konsultasi'],
-        ['label' => 'Info Penyakit', 'route' => 'info', 'fallback' => '#info'],
-        ['label' => 'Profil Pakar', 'route' => 'expert-profile', 'fallback' => '#pakar'],
+        ['label' => 'Beranda', 'route' => 'home', 'fallback' => url('/'), 'icon' => 'home'],
+        ['label' => 'Konsultasi', 'route' => 'consultation.create', 'fallback' => '#konsultasi', 'icon' => 'clipboard-list'],
+        ['label' => 'Info Penyakit', 'route' => 'info', 'fallback' => '#info', 'icon' => 'book-open'],
+        ['label' => 'Profil Pakar', 'route' => 'expert-profile', 'fallback' => '#pakar', 'icon' => 'user-round'],
     ];
 @endphp
 
@@ -38,18 +38,21 @@
                                 $href = \Illuminate\Support\Facades\Route::has($item['route']) ? route($item['route']) : $item['fallback'];
                                 $active = request()->routeIs($item['route']);
                             @endphp
-                            <a href="{{ $href }}" class="rounded-md px-3 py-2 text-sm font-medium transition {{ $active ? 'bg-teal-50 text-teal-800' : 'text-slate-600 hover:bg-slate-100 hover:text-slate-950' }}">
+                            <a href="{{ $href }}" class="inline-flex items-center gap-2 rounded-md px-3 py-2 text-sm font-medium transition {{ $active ? 'bg-teal-50 text-teal-800' : 'text-slate-600 hover:bg-slate-100 hover:text-slate-950' }}">
+                                <x-icon :name="$item['icon']" class="size-4" />
                                 {{ $item['label'] }}
                             </a>
                         @endforeach
                     </nav>
 
                     <div class="hidden items-center gap-2 sm:flex">
-                        <a href="{{ \Illuminate\Support\Facades\Route::has('admin.dashboard') ? route('admin.dashboard') : '#' }}" class="rounded-md border border-slate-200 px-3 py-2 text-sm font-semibold text-slate-700 transition hover:border-slate-300 hover:bg-slate-100">
+                        <a href="{{ \Illuminate\Support\Facades\Route::has('admin.dashboard') ? route('admin.dashboard') : '#' }}" class="inline-flex items-center gap-2 rounded-md border border-slate-200 px-3 py-2 text-sm font-semibold text-slate-700 transition hover:border-slate-300 hover:bg-slate-100">
+                            <x-icon name="shield-check" class="size-4" />
                             Admin
                         </a>
-                        <a href="{{ \Illuminate\Support\Facades\Route::has('consultation.create') ? route('consultation.create') : '#konsultasi' }}" class="rounded-md bg-teal-700 px-4 py-2 text-sm font-semibold text-white shadow-sm transition hover:bg-teal-800">
+                        <a href="{{ \Illuminate\Support\Facades\Route::has('consultation.create') ? route('consultation.create') : '#konsultasi' }}" class="inline-flex items-center gap-2 rounded-md bg-teal-700 px-4 py-2 text-sm font-semibold text-white shadow-sm transition hover:bg-teal-800">
                             Mulai Konsultasi
+                            <x-icon name="arrow-right" class="size-4" />
                         </a>
                     </div>
                 </div>
@@ -59,7 +62,8 @@
                         @php
                             $href = \Illuminate\Support\Facades\Route::has($item['route']) ? route($item['route']) : $item['fallback'];
                         @endphp
-                        <a href="{{ $href }}" class="shrink-0 rounded-md border border-slate-200 bg-white px-3 py-2 text-xs font-semibold text-slate-700">
+                        <a href="{{ $href }}" class="inline-flex shrink-0 items-center gap-2 rounded-md border border-slate-200 bg-white px-3 py-2 text-xs font-semibold text-slate-700">
+                            <x-icon :name="$item['icon']" class="size-3.5" />
                             {{ $item['label'] }}
                         </a>
                     @endforeach

@@ -46,15 +46,20 @@
         <div class="mx-auto max-w-6xl px-4 py-10 sm:px-6 lg:px-8">
             <div class="flex flex-col gap-4 border-b border-slate-200 pb-6 md:flex-row md:items-end md:justify-between">
                 <div>
-                    <p class="text-sm font-semibold text-teal-700">Hasil konsultasi</p>
+                    <p class="flex items-center gap-2 text-sm font-semibold text-teal-700">
+                        <x-icon name="clipboard-check" class="size-4" />
+                        Hasil konsultasi
+                    </p>
                     <h1 class="mt-3 text-3xl font-semibold tracking-normal text-slate-950">Ringkasan deteksi awal</h1>
                     <p class="mt-2 text-sm leading-6 text-slate-500">{{ $createdLabel }}</p>
                 </div>
                 <div class="flex flex-col gap-3 sm:flex-row">
-                    <a href="{{ $printUrl }}" class="inline-flex items-center justify-center rounded-md border border-slate-300 bg-white px-4 py-2 text-sm font-semibold text-slate-700 transition hover:bg-slate-100">
+                    <a href="{{ $printUrl }}" class="inline-flex items-center justify-center gap-2 rounded-md border border-slate-300 bg-white px-4 py-2 text-sm font-semibold text-slate-700 transition hover:bg-slate-100">
+                        <x-icon name="printer" class="size-4" />
                         Cetak
                     </a>
-                    <a href="{{ \Illuminate\Support\Facades\Route::has('consultation.create') ? route('consultation.create') : '#' }}" class="inline-flex items-center justify-center rounded-md bg-teal-700 px-4 py-2 text-sm font-semibold text-white transition hover:bg-teal-800">
+                    <a href="{{ \Illuminate\Support\Facades\Route::has('consultation.create') ? route('consultation.create') : '#' }}" class="inline-flex items-center justify-center gap-2 rounded-md bg-teal-700 px-4 py-2 text-sm font-semibold text-white transition hover:bg-teal-800">
+                        <x-icon name="refresh-cw" class="size-4" />
                         Konsultasi Baru
                     </a>
                 </div>
@@ -62,7 +67,10 @@
 
             <div class="mt-8 grid gap-6 lg:grid-cols-[0.95fr_1.05fr]">
                 <section class="rounded-lg border border-teal-200 bg-teal-50 p-6">
-                    <p class="text-sm font-semibold text-teal-800">Kemungkinan tertinggi</p>
+                    <p class="flex items-center gap-2 text-sm font-semibold text-teal-800">
+                        <x-icon name="chart-bar" class="size-4" />
+                        Kemungkinan tertinggi
+                    </p>
                     <div class="mt-4 flex items-start justify-between gap-4">
                         <div>
                             <h2 class="text-2xl font-semibold tracking-normal text-slate-950">{{ $primaryName }}</h2>
@@ -79,7 +87,10 @@
                 </section>
 
                 <section class="rounded-lg border border-slate-200 bg-white p-6">
-                    <h2 class="text-base font-semibold text-slate-950">Data pasien</h2>
+                    <h2 class="flex items-center gap-2 text-base font-semibold text-slate-950">
+                        <x-icon name="user-round" class="size-5 text-teal-700" />
+                        Data pasien
+                    </h2>
                     <dl class="mt-5 grid gap-4 sm:grid-cols-2">
                         <div>
                             <dt class="text-xs font-semibold text-slate-500">Nama</dt>
@@ -121,7 +132,10 @@
 
             <div class="mt-6 grid gap-6 lg:grid-cols-[1.05fr_0.95fr]">
                 <section class="rounded-lg border border-slate-200 bg-white p-5">
-                    <h2 class="text-base font-semibold text-slate-950">Gejala terpilih</h2>
+                    <h2 class="flex items-center gap-2 text-base font-semibold text-slate-950">
+                        <x-icon name="list-check" class="size-5 text-teal-700" />
+                        Gejala terpilih
+                    </h2>
                     <div class="mt-4 grid gap-3 md:grid-cols-2">
                         @forelse ($selectedSymptoms as $symptom)
                             <div class="rounded-md border border-slate-200 bg-slate-50 p-3">
@@ -134,10 +148,18 @@
                 </section>
 
                 <section class="rounded-lg border border-slate-200 bg-slate-50 p-5">
-                    <h2 class="text-base font-semibold text-slate-950">Rekomendasi awal</h2>
-                    <p class="mt-3 text-sm leading-6 text-slate-600">
-                        Simpan hasil ini, diskusikan dengan wali atau guru BK, dan hubungi tenaga profesional jika gejala terasa berat atau berlanjut.
-                    </p>
+                    <div class="grid gap-5 sm:grid-cols-[140px_1fr] sm:items-center">
+                        <img src="{{ asset('images/result-summary.svg') }}" alt="Ilustrasi ringkasan hasil konsultasi" class="w-full rounded-md border border-slate-200 bg-white object-cover">
+                        <div>
+                            <h2 class="flex items-center gap-2 text-base font-semibold text-slate-950">
+                                <x-icon name="heart-handshake" class="size-5 text-teal-700" />
+                                Rekomendasi awal
+                            </h2>
+                            <p class="mt-3 text-sm leading-6 text-slate-600">
+                                Simpan hasil ini, diskusikan dengan wali atau guru BK, dan hubungi tenaga profesional jika gejala terasa berat atau berlanjut.
+                            </p>
+                        </div>
+                    </div>
                 </section>
             </div>
         </div>

@@ -2,11 +2,11 @@
     $appName = config('app.name', 'Sistem Pakar MentalCare');
     $pageTitle = trim(($title ?? 'Admin') . '');
     $adminNav = [
-        ['label' => 'Dashboard', 'route' => 'admin.dashboard'],
-        ['label' => 'Gejala', 'route' => 'admin.symptoms.index'],
-        ['label' => 'Gangguan', 'route' => 'admin.disorders.index'],
-        ['label' => 'Basis Pengetahuan', 'route' => 'admin.knowledge-rules.index'],
-        ['label' => 'Konsultasi', 'route' => 'admin.consultations.index'],
+        ['label' => 'Dashboard', 'route' => 'admin.dashboard', 'icon' => 'layout-dashboard'],
+        ['label' => 'Gejala', 'route' => 'admin.symptoms.index', 'icon' => 'activity'],
+        ['label' => 'Gangguan', 'route' => 'admin.disorders.index', 'icon' => 'brain'],
+        ['label' => 'Basis Pengetahuan', 'route' => 'admin.knowledge-rules.index', 'icon' => 'network'],
+        ['label' => 'Konsultasi', 'route' => 'admin.consultations.index', 'icon' => 'history'],
     ];
 @endphp
 
@@ -32,7 +32,8 @@
                         <span class="block text-sm font-semibold">Admin Sistem Pakar</span>
                         <span class="block text-xs text-slate-500">Manajemen pengetahuan</span>
                     </a>
-                    <a href="{{ \Illuminate\Support\Facades\Route::has('home') ? route('home') : url('/') }}" class="rounded-md border border-slate-300 bg-white px-3 py-2 text-xs font-semibold text-slate-700 transition hover:bg-slate-100 lg:mt-6 lg:inline-flex">
+                    <a href="{{ \Illuminate\Support\Facades\Route::has('home') ? route('home') : url('/') }}" class="inline-flex items-center gap-2 rounded-md border border-slate-300 bg-white px-3 py-2 text-xs font-semibold text-slate-700 transition hover:bg-slate-100 lg:mt-6">
+                        <x-icon name="external-link" class="size-3.5" />
                         Lihat Situs
                     </a>
                 </div>
@@ -43,7 +44,8 @@
                             $href = \Illuminate\Support\Facades\Route::has($item['route']) ? route($item['route']) : '#';
                             $active = request()->routeIs($item['route']) || request()->routeIs(str_replace('.index', '.*', $item['route']));
                         @endphp
-                        <a href="{{ $href }}" class="block shrink-0 rounded-md px-3 py-2 text-sm font-medium transition {{ $active ? 'bg-teal-700 text-white' : 'text-slate-600 hover:bg-white hover:text-slate-950' }}">
+                        <a href="{{ $href }}" class="inline-flex shrink-0 items-center gap-2 rounded-md px-3 py-2 text-sm font-medium transition lg:flex {{ $active ? 'bg-teal-700 text-white' : 'text-slate-600 hover:bg-white hover:text-slate-950' }}">
+                            <x-icon :name="$item['icon']" class="size-4" />
                             {{ $item['label'] }}
                         </a>
                     @endforeach
@@ -68,7 +70,8 @@
 
                 <main class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
                     @if (session('status') || session('success'))
-                        <div class="mb-5 rounded-lg border border-teal-200 bg-teal-50 px-4 py-3 text-sm font-medium text-teal-900">
+                        <div class="mb-5 flex items-center gap-3 rounded-lg border border-teal-200 bg-teal-50 px-4 py-3 text-sm font-medium text-teal-900">
+                            <x-icon name="check-circle" class="size-4 shrink-0" />
                             {{ session('status') ?? session('success') }}
                         </div>
                     @endif

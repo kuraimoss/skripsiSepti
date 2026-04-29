@@ -48,8 +48,14 @@
     <body class="bg-slate-100 text-slate-950 antialiased print:bg-white">
         <main class="mx-auto max-w-4xl bg-white px-6 py-8 shadow-sm print:max-w-none print:px-0 print:py-0 print:shadow-none">
             <div class="no-print mb-6 flex justify-end gap-3">
-                <button type="button" onclick="window.print()" class="rounded-md bg-teal-700 px-4 py-2 text-sm font-semibold text-white transition hover:bg-teal-800">Cetak</button>
-                <a href="{{ url()->previous() }}" class="rounded-md border border-slate-300 px-4 py-2 text-sm font-semibold text-slate-700 transition hover:bg-slate-100">Kembali</a>
+                <button type="button" onclick="window.print()" class="inline-flex items-center gap-2 rounded-md bg-teal-700 px-4 py-2 text-sm font-semibold text-white transition hover:bg-teal-800">
+                    <x-icon name="printer" class="size-4" />
+                    Cetak
+                </button>
+                <a href="{{ url()->previous() }}" class="inline-flex items-center gap-2 rounded-md border border-slate-300 px-4 py-2 text-sm font-semibold text-slate-700 transition hover:bg-slate-100">
+                    <x-icon name="arrow-right" class="size-4 rotate-180" />
+                    Kembali
+                </a>
             </div>
 
             <header class="border-b-2 border-slate-900 pb-5 text-center">
