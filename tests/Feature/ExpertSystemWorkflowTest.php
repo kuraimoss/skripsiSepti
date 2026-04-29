@@ -193,7 +193,12 @@ class ExpertSystemWorkflowTest extends TestCase
             'belief' => 0.45,
         ]);
 
-        $this->get(route('admin.knowledge-rules.index'))->assertOk();
+        $indexResponse = $this->get(route('admin.knowledge-rules.index'));
+
+        $indexResponse->assertOk();
+        $indexResponse->assertSee('0.5');
+        $indexResponse->assertDontSee('0.5000');
+        $indexResponse->assertDontSee('0.3000');
 
         if (Route::has('admin.knowledge-rules.create')) {
             $this->get(route('admin.knowledge-rules.create'))->assertOk();

@@ -17,8 +17,8 @@ class ConsultationResult extends Model
     protected function casts(): array
     {
         return [
-            'belief' => 'decimal:5',
-            'percentage' => 'decimal:2',
+            'belief' => 'float',
+            'percentage' => 'float',
             'rank' => 'integer',
             'is_selected' => 'boolean',
         ];

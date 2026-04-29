@@ -38,8 +38,8 @@ class Consultation extends Model
             'respondent_age' => 'integer',
             'started_at' => 'datetime',
             'completed_at' => 'datetime',
-            'confidence_score' => 'decimal:5',
-            'confidence_percentage' => 'decimal:2',
+            'confidence_score' => 'float',
+            'confidence_percentage' => 'float',
             'mass_values' => 'array',
         ];
     }

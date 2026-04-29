@@ -17,7 +17,7 @@ class ConsultationSymptom extends Model
     protected function casts(): array
     {
         return [
-            'belief' => 'decimal:4',
+            'belief' => 'float',
             'selected' => 'boolean',
             'sort_order' => 'integer',
         ];
