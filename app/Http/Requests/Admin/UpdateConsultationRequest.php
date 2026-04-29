@@ -6,11 +6,19 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class UpdateConsultationRequest extends FormRequest
 {
+    /**
+     * Function ini digunakan untuk mengizinkan admin
+     * memperbarui data riwayat konsultasi.
+     */
     public function authorize(): bool
     {
         return true;
     }
 
+    /**
+     * Function ini digunakan untuk menentukan aturan validasi
+     * saat admin mengubah riwayat konsultasi.
+     */
     public function rules(): array
     {
         return [

@@ -28,6 +28,10 @@ class DempsterShaferService
      */
     private array $symptomOrder;
 
+    /**
+     * Function ini digunakan untuk menyiapkan data gangguan dan basis pengetahuan
+     * dari database atau data bawaan sebelum perhitungan dilakukan.
+     */
     public function __construct(?array $knowledgeBase = null, ?array $disorders = null)
     {
         $databaseData = ($knowledgeBase === null && $disorders === null)
@@ -39,6 +43,10 @@ class DempsterShaferService
         $this->symptomOrder = array_flip(array_keys($this->knowledgeBase));
     }
 
+    /**
+     * Function ini digunakan untuk menghitung diagnosis berdasarkan gejala
+     * yang dipilih user menggunakan metode Dempster-Shafer.
+     */
     public function diagnose(Collection|array $symptoms): array
     {
         [$selectedCodes, $unknownCodes] = $this->resolveSelectedCodes($symptoms);
@@ -134,6 +142,10 @@ class DempsterShaferService
         ];
     }
 
+    /**
+     * Function ini digunakan untuk mengambil daftar gejala
+     * dari basis pengetahuan yang sedang dipakai service.
+     */
     public function symptoms(): array
     {
         return array_values(array_map(
@@ -142,16 +154,28 @@ class DempsterShaferService
         ));
     }
 
+    /**
+     * Function ini digunakan untuk mengambil daftar gangguan
+     * dari basis pengetahuan yang sedang dipakai service.
+     */
     public function disorders(): array
     {
         return array_values($this->disorders);
     }
 
+    /**
+     * Function ini digunakan untuk mengambil data basis pengetahuan mentah
+     * yang berisi gejala, belief, dan relasi gangguan.
+     */
     public function knowledgeBase(): array
     {
         return $this->knowledgeBase;
     }
 
+    /**
+     * Function ini digunakan untuk menggabungkan massa belief lama
+     * dengan evidence baru sesuai aturan Dempster-Shafer.
+     */
     private function combineMasses(array $currentMass, array $evidenceMass, array $incomingHypotheses): array
     {
         $rawMass = [];
@@ -199,10 +223,12 @@ class DempsterShaferService
         ];
     }
 
+    /**
+     * Function ini digunakan untuk menyesuaikan massa hasil kombinasi
+     * agar mengikuti pola perhitungan pada contoh di dokumen skripsi.
+     */
     private function collapseToIncomingHypothesis(array $rawMass, array $incomingHypotheses): array
     {
-        // The source document's worked example groups all non-Theta mass into the
-        // newest symptom hypothesis after each combination.
         $incomingKey = $this->focusKey($incomingHypotheses);
         $collapsed = [
             $incomingKey => 0.0,
@@ -222,6 +248,10 @@ class DempsterShaferService
         return $this->cleanMass($collapsed);
     }
 
+    /**
+     * Function ini digunakan untuk mengambil kode gejala yang valid
+     * dari input user dan memisahkan kode yang tidak dikenal sistem.
+     */
     private function resolveSelectedCodes(Collection|array $symptoms): array
     {
         $items = $symptoms instanceof Collection ? $symptoms->all() : $symptoms;
@@ -255,6 +285,10 @@ class DempsterShaferService
         return [$codes, $unknownCodes];
     }
 
+    /**
+     * Function ini digunakan untuk membaca kode gejala
+     * dari berbagai bentuk input seperti string, array, atau object.
+     */
     private function extractCode(int|string $key, mixed $value): ?string
     {
         if (is_string($value) || is_int($value)) {
@@ -284,6 +318,10 @@ class DempsterShaferService
         return null;
     }
 
+    /**
+     * Function ini digunakan untuk menormalkan format kode gejala
+     * agar selalu konsisten seperti G01, G02, dan seterusnya.
+     */
     private function normalizeSymptomCode(string $code): ?string
     {
         $code = strtoupper(trim($code));
@@ -303,6 +341,10 @@ class DempsterShaferService
         return $code;
     }
 
+    /**
+     * Function ini digunakan untuk mencari irisan hipotesis
+     * antara dua massa belief yang sedang dikombinasikan.
+     */
     private function intersectFocus(string $left, string $right): ?string
     {
         if ($left === self::THETA) {
@@ -318,6 +360,10 @@ class DempsterShaferService
         return $intersection === [] ? null : $this->focusKey($intersection);
     }
 
+    /**
+     * Function ini digunakan untuk menentukan key massa
+     * yang memiliki nilai belief paling dominan.
+     */
     private function dominantMassKey(array $mass): string
     {
         $dominantKey = self::THETA;
@@ -337,11 +383,19 @@ class DempsterShaferService
         return $dominantKey;
     }
 
+    /**
+     * Function ini digunakan untuk mengambil nilai belief terbesar
+     * dari massa hasil perhitungan.
+     */
     private function dominantBelief(array $mass): float
     {
         return $mass[$this->dominantMassKey($mass)] ?? 0.0;
     }
 
+    /**
+     * Function ini digunakan untuk mengubah data gejala
+     * menjadi format array yang siap ditampilkan.
+     */
     private function formatSymptom(string $code): array
     {
         $symptom = $this->knowledgeBase[$code];
@@ -354,6 +408,10 @@ class DempsterShaferService
         ];
     }
 
+    /**
+     * Function ini digunakan untuk mengubah hipotesis hasil akhir
+     * menjadi data gangguan yang mudah dibaca.
+     */
     private function formatResult(string $focus): array
     {
         if ($focus === self::THETA) {
@@ -374,6 +432,10 @@ class DempsterShaferService
         ];
     }
 
+    /**
+     * Function ini digunakan untuk merapikan nilai massa belief
+     * dengan label yang mudah dibaca pada tampilan hasil.
+     */
     private function formatMass(array $mass): array
     {
         $formatted = [];
@@ -385,11 +447,19 @@ class DempsterShaferService
         return $formatted;
     }
 
+    /**
+     * Function ini digunakan untuk mengubah key hipotesis
+     * menjadi label singkat seperti P01 atau Theta.
+     */
     private function formatFocusLabel(string $focus): string
     {
         return $focus === self::THETA ? 'Theta' : str_replace('|', ',', $focus);
     }
 
+    /**
+     * Function ini digunakan untuk membuat key hipotesis
+     * dari daftar kode gangguan yang terurut.
+     */
     private function focusKey(array $codes): string
     {
         $codes = array_values(array_unique(array_map(fn (string $code): string => strtoupper($code), $codes)));
@@ -400,11 +470,19 @@ class DempsterShaferService
         return implode('|', $codes);
     }
 
+    /**
+     * Function ini digunakan untuk mengubah key hipotesis
+     * kembali menjadi daftar kode gangguan.
+     */
     private function parseFocusKey(string $focus): array
     {
         return $focus === self::THETA ? array_keys($this->disorders) : explode('|', $focus);
     }
 
+    /**
+     * Function ini digunakan untuk menghapus massa bernilai sangat kecil
+     * lalu mengurutkannya agar hasil tetap rapi.
+     */
     private function cleanMass(array $mass): array
     {
         $clean = [];
@@ -420,6 +498,10 @@ class DempsterShaferService
         return $this->sortMass($clean);
     }
 
+    /**
+     * Function ini digunakan untuk mengurutkan massa belief
+     * berdasarkan urutan kode gangguan pada basis pengetahuan.
+     */
     private function sortMass(array $mass): array
     {
         $order = array_flip(array_keys($this->disorders));
@@ -445,6 +527,10 @@ class DempsterShaferService
         return $mass;
     }
 
+    /**
+     * Function ini digunakan untuk menentukan label tingkat kepastian
+     * berdasarkan nilai belief akhir.
+     */
     private function certaintyLabel(float $belief): string
     {
         return match (true) {
@@ -455,16 +541,28 @@ class DempsterShaferService
         };
     }
 
+    /**
+     * Function ini digunakan untuk membulatkan nilai belief
+     * agar hasil perhitungan konsisten.
+     */
     private function roundValue(float $value): float
     {
         return round($value, 6);
     }
 
+    /**
+     * Function ini digunakan untuk mengubah belief menjadi persentase
+     * yang dibulatkan untuk tampilan hasil.
+     */
     private function roundPercentage(float $belief): float
     {
         return round($belief * 100, 1);
     }
 
+    /**
+     * Function ini digunakan untuk memformat persentase
+     * tanpa angka nol desimal yang tidak diperlukan.
+     */
     private function formatPercentageText(float $percentage): string
     {
         $text = rtrim(rtrim(number_format($percentage, 1, '.', ''), '0'), '.');
@@ -473,6 +571,9 @@ class DempsterShaferService
     }
 
     /**
+     * Function ini digunakan untuk mengambil basis pengetahuan
+     * dari database jika tabel dan data sudah tersedia.
+     *
      * @return array{disorders: array<string, array{code: string, name: string, solution: string|null}>, knowledgeBase: array<string, array{code: string, name: string, belief: float, disorders: list<string>}>}|null
      */
     private function databaseKnowledgeBase(): ?array
@@ -538,6 +639,10 @@ class DempsterShaferService
         }
     }
 
+    /**
+     * Function ini digunakan untuk menyusun nama gangguan
+     * dengan nama ilmiah jika data tersebut tersedia.
+     */
     private function disorderDisplayName(MentalDisorder $disorder): string
     {
         if (filled($disorder->scientific_name)) {
@@ -547,6 +652,10 @@ class DempsterShaferService
         return $disorder->name;
     }
 
+    /**
+     * Function ini digunakan untuk menyediakan data gangguan bawaan
+     * saat database belum dapat digunakan.
+     */
     private function defaultDisorders(): array
     {
         return [
@@ -563,6 +672,10 @@ class DempsterShaferService
         ];
     }
 
+    /**
+     * Function ini digunakan untuk menyediakan basis pengetahuan bawaan
+     * yang sesuai dengan data gejala pada dokumen skripsi.
+     */
     private function defaultKnowledgeBase(): array
     {
         return [

@@ -8,11 +8,19 @@ use Illuminate\Validation\Rule;
 
 class UpdateKnowledgeRuleRequest extends FormRequest
 {
+    /**
+     * Function ini digunakan untuk mengizinkan admin
+     * memperbarui aturan basis pengetahuan.
+     */
     public function authorize(): bool
     {
         return true;
     }
 
+    /**
+     * Function ini digunakan untuk menormalkan input aturan
+     * sebelum proses validasi dijalankan.
+     */
     protected function prepareForValidation(): void
     {
         $this->merge([
@@ -21,6 +29,10 @@ class UpdateKnowledgeRuleRequest extends FormRequest
         ]);
     }
 
+    /**
+     * Function ini digunakan untuk menentukan aturan validasi
+     * relasi gejala, gangguan, dan belief yang sedang diperbarui.
+     */
     public function rules(): array
     {
         return [
@@ -38,6 +50,10 @@ class UpdateKnowledgeRuleRequest extends FormRequest
         ];
     }
 
+    /**
+     * Function ini digunakan untuk mengambil ID model
+     * dari parameter route yang sedang diproses.
+     */
     private function routeKey(string $parameter): mixed
     {
         $value = $this->route($parameter);

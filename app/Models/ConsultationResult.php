@@ -10,7 +10,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class ConsultationResult extends Model
 {
     /**
-     * Get the attributes that should be cast.
+     * Function ini digunakan untuk menentukan tipe data otomatis
+     * pada atribut hasil konsultasi.
      *
      * @return array<string, string>
      */
@@ -24,16 +25,28 @@ class ConsultationResult extends Model
         ];
     }
 
+    /**
+     * Function ini digunakan untuk menghubungkan hasil diagnosis
+     * dengan data konsultasi asalnya.
+     */
     public function consultation(): BelongsTo
     {
         return $this->belongsTo(Consultation::class);
     }
 
+    /**
+     * Function ini digunakan untuk mengambil gangguan
+     * yang terkait dengan hasil diagnosis.
+     */
     public function mentalDisorder(): BelongsTo
     {
         return $this->belongsTo(MentalDisorder::class);
     }
 
+    /**
+     * Function ini digunakan sebagai alias relasi
+     * menuju gangguan pada hasil diagnosis.
+     */
     public function disorder(): BelongsTo
     {
         return $this->mentalDisorder();

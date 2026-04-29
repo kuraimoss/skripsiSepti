@@ -7,7 +7,8 @@ use Illuminate\Support\Facades\Schema;
 return new class extends Migration
 {
     /**
-     * Run the migrations.
+     * Function ini digunakan untuk menambahkan kolom is_admin
+     * pada tabel users jika kolom tersebut belum ada.
      */
     public function up(): void
     {
@@ -21,7 +22,8 @@ return new class extends Migration
     }
 
     /**
-     * Reverse the migrations.
+     * Function ini digunakan untuk menghapus kolom is_admin
+     * dari tabel users saat rollback.
      */
     public function down(): void
     {

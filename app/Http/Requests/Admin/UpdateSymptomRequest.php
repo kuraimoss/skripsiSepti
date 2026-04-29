@@ -8,11 +8,19 @@ use Illuminate\Validation\Rule;
 
 class UpdateSymptomRequest extends FormRequest
 {
+    /**
+     * Function ini digunakan untuk mengizinkan admin
+     * memperbarui data gejala.
+     */
     public function authorize(): bool
     {
         return true;
     }
 
+    /**
+     * Function ini digunakan untuk menyamakan input bobot
+     * ke field belief sebelum divalidasi.
+     */
     protected function prepareForValidation(): void
     {
         $this->merge([
@@ -20,6 +28,10 @@ class UpdateSymptomRequest extends FormRequest
         ]);
     }
 
+    /**
+     * Function ini digunakan untuk menentukan aturan validasi
+     * data gejala yang sedang diperbarui.
+     */
     public function rules(): array
     {
         return [
@@ -30,6 +42,10 @@ class UpdateSymptomRequest extends FormRequest
         ];
     }
 
+    /**
+     * Function ini digunakan untuk mengambil ID model
+     * dari parameter route yang sedang diproses.
+     */
     private function routeKey(string $parameter): mixed
     {
         $value = $this->route($parameter);

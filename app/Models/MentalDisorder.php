@@ -10,11 +10,19 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 #[Fillable(['code', 'name', 'scientific_name', 'description', 'solution'])]
 class MentalDisorder extends Model
 {
+    /**
+     * Function ini digunakan untuk mengambil aturan basis pengetahuan
+     * yang dimiliki oleh satu gangguan.
+     */
     public function knowledgeRules(): HasMany
     {
         return $this->hasMany(KnowledgeRule::class);
     }
 
+    /**
+     * Function ini digunakan untuk mengambil daftar gejala
+     * yang berhubungan dengan satu gangguan.
+     */
     public function symptoms(): BelongsToMany
     {
         return $this->belongsToMany(Symptom::class, 'knowledge_rules')
@@ -22,11 +30,19 @@ class MentalDisorder extends Model
             ->withTimestamps();
     }
 
+    /**
+     * Function ini digunakan untuk mengambil riwayat konsultasi
+     * yang mendeteksi gangguan ini sebagai hasil utama.
+     */
     public function detectedConsultations(): HasMany
     {
         return $this->hasMany(Consultation::class, 'detected_mental_disorder_id');
     }
 
+    /**
+     * Function ini digunakan untuk mengambil semua hasil konsultasi
+     * yang berhubungan dengan gangguan ini.
+     */
     public function consultationResults(): HasMany
     {
         return $this->hasMany(ConsultationResult::class);

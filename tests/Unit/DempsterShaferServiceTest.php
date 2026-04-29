@@ -8,6 +8,10 @@ use PHPUnit\Framework\TestCase;
 
 class DempsterShaferServiceTest extends TestCase
 {
+    /**
+     * Function ini digunakan untuk memastikan contoh perhitungan dokumen
+     * menghasilkan belief, persentase, dan label kepastian yang benar.
+     */
     public function test_document_example_returns_expected_belief_percentage_and_certainty(): void
     {
         $service = new DempsterShaferService;
@@ -26,6 +30,10 @@ class DempsterShaferServiceTest extends TestCase
         $this->assertSame(['G01', 'G03', 'G08', 'G11'], array_column($result['selected_symptoms'], 'code'));
     }
 
+    /**
+     * Function ini digunakan untuk memastikan input collection tetap
+     * diproses dengan urutan basis pengetahuan yang konsisten.
+     */
     public function test_diagnose_accepts_collection_and_uses_deterministic_knowledge_base_order(): void
     {
         $service = new DempsterShaferService;
@@ -37,6 +45,10 @@ class DempsterShaferServiceTest extends TestCase
         $this->assertEqualsWithDelta(0.976, $result['belief'], 0.000001);
     }
 
+    /**
+     * Function ini digunakan untuk memastikan input gejala kosong
+     * menghasilkan hasil deteksi kosong yang aman.
+     */
     public function test_empty_symptoms_return_empty_detection_result(): void
     {
         $service = new DempsterShaferService;

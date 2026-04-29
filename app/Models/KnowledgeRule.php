@@ -10,7 +10,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class KnowledgeRule extends Model
 {
     /**
-     * Get the attributes that should be cast.
+     * Function ini digunakan untuk menentukan tipe data otomatis
+     * pada atribut aturan basis pengetahuan.
      *
      * @return array<string, string>
      */
@@ -21,16 +22,28 @@ class KnowledgeRule extends Model
         ];
     }
 
+    /**
+     * Function ini digunakan untuk mengambil gangguan
+     * yang terhubung dengan aturan basis pengetahuan.
+     */
     public function mentalDisorder(): BelongsTo
     {
         return $this->belongsTo(MentalDisorder::class);
     }
 
+    /**
+     * Function ini digunakan sebagai alias relasi
+     * menuju gangguan pada aturan basis pengetahuan.
+     */
     public function disorder(): BelongsTo
     {
         return $this->mentalDisorder();
     }
 
+    /**
+     * Function ini digunakan untuk mengambil gejala
+     * yang terhubung dengan aturan basis pengetahuan.
+     */
     public function symptom(): BelongsTo
     {
         return $this->belongsTo(Symptom::class);

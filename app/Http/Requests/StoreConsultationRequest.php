@@ -7,11 +7,19 @@ use Illuminate\Validation\Rule;
 
 class StoreConsultationRequest extends FormRequest
 {
+    /**
+     * Function ini digunakan untuk mengizinkan user
+     * mengirim data konsultasi dari halaman publik.
+     */
     public function authorize(): bool
     {
         return true;
     }
 
+    /**
+     * Function ini digunakan untuk menormalkan nama field input
+     * sebelum data konsultasi divalidasi.
+     */
     protected function prepareForValidation(): void
     {
         $symptoms = $this->input('symptoms', $this->input('gejala', $this->input('symptom_ids')));
@@ -35,6 +43,9 @@ class StoreConsultationRequest extends FormRequest
     }
 
     /**
+     * Function ini digunakan untuk menentukan aturan validasi
+     * data pasien dan gejala yang dipilih pada konsultasi.
+     *
      * @return array<string, mixed>
      */
     public function rules(): array
@@ -55,6 +66,9 @@ class StoreConsultationRequest extends FormRequest
     }
 
     /**
+     * Function ini digunakan untuk memberi nama field validasi
+     * agar pesan error lebih mudah dipahami user.
+     *
      * @return array<string, string>
      */
     public function attributes(): array
@@ -75,6 +89,9 @@ class StoreConsultationRequest extends FormRequest
     }
 
     /**
+     * Function ini digunakan untuk menyiapkan pesan error khusus
+     * pada beberapa aturan validasi konsultasi.
+     *
      * @return array<string, string>
      */
     public function messages(): array
@@ -88,6 +105,10 @@ class StoreConsultationRequest extends FormRequest
         ];
     }
 
+    /**
+     * Function ini digunakan untuk menormalkan input jenis kelamin
+     * ke format laki-laki atau perempuan.
+     */
     private function normalizeGender(mixed $gender): mixed
     {
         if ($gender === null) {

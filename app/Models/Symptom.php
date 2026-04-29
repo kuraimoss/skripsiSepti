@@ -11,7 +11,8 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class Symptom extends Model
 {
     /**
-     * Get the attributes that should be cast.
+     * Function ini digunakan untuk menentukan tipe data otomatis
+     * pada atribut gejala.
      *
      * @return array<string, string>
      */
@@ -22,11 +23,19 @@ class Symptom extends Model
         ];
     }
 
+    /**
+     * Function ini digunakan untuk mengambil aturan basis pengetahuan
+     * yang memakai gejala ini.
+     */
     public function knowledgeRules(): HasMany
     {
         return $this->hasMany(KnowledgeRule::class);
     }
 
+    /**
+     * Function ini digunakan untuk mengambil daftar gangguan
+     * yang berhubungan dengan gejala ini.
+     */
     public function mentalDisorders(): BelongsToMany
     {
         return $this->belongsToMany(MentalDisorder::class, 'knowledge_rules')
@@ -34,11 +43,19 @@ class Symptom extends Model
             ->withTimestamps();
     }
 
+    /**
+     * Function ini digunakan untuk mengambil detail konsultasi
+     * yang pernah memilih gejala ini.
+     */
     public function consultationSymptoms(): HasMany
     {
         return $this->hasMany(ConsultationSymptom::class);
     }
 
+    /**
+     * Function ini digunakan untuk mengambil daftar konsultasi
+     * yang pernah memilih gejala ini.
+     */
     public function consultations(): BelongsToMany
     {
         return $this->belongsToMany(Consultation::class, 'consultation_symptoms')

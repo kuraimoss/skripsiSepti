@@ -7,7 +7,8 @@ use Illuminate\Support\Facades\Schema;
 return new class extends Migration
 {
     /**
-     * Run the migrations.
+     * Function ini digunakan untuk membuat semua tabel utama
+     * sistem pakar, konsultasi, gejala, gangguan, dan hasil diagnosis.
      */
     public function up(): void
     {
@@ -88,7 +89,8 @@ return new class extends Migration
     }
 
     /**
-     * Reverse the migrations.
+     * Function ini digunakan untuk menghapus tabel utama sistem pakar
+     * saat proses rollback migration dijalankan.
      */
     public function down(): void
     {

@@ -7,11 +7,19 @@ use Illuminate\Validation\Rule;
 
 class StoreKnowledgeRuleRequest extends FormRequest
 {
+    /**
+     * Function ini digunakan untuk mengizinkan admin
+     * menyimpan aturan basis pengetahuan baru.
+     */
     public function authorize(): bool
     {
         return true;
     }
 
+    /**
+     * Function ini digunakan untuk menormalkan input aturan
+     * sebelum proses validasi dijalankan.
+     */
     protected function prepareForValidation(): void
     {
         $this->merge([
@@ -20,6 +28,10 @@ class StoreKnowledgeRuleRequest extends FormRequest
         ]);
     }
 
+    /**
+     * Function ini digunakan untuk menentukan aturan validasi
+     * relasi gejala, gangguan, dan nilai belief.
+     */
     public function rules(): array
     {
         return [

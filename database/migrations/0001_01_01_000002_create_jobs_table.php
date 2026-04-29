@@ -7,7 +7,8 @@ use Illuminate\Support\Facades\Schema;
 return new class extends Migration
 {
     /**
-     * Run the migrations.
+     * Function ini digunakan untuk membuat tabel queue,
+     * batch job, dan failed job aplikasi.
      */
     public function up(): void
     {
@@ -46,7 +47,8 @@ return new class extends Migration
     }
 
     /**
-     * Reverse the migrations.
+     * Function ini digunakan untuk menghapus tabel queue,
+     * batch job, dan failed job saat rollback.
      */
     public function down(): void
     {

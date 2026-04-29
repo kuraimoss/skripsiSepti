@@ -17,11 +17,19 @@ class ExpertSystemWorkflowTest extends TestCase
 {
     use RefreshDatabase;
 
+    /**
+     * Function ini digunakan untuk memastikan halaman beranda
+     * dapat dibuka dengan status berhasil.
+     */
     public function test_home_page_loads(): void
     {
         $this->get('/')->assertOk();
     }
 
+    /**
+     * Function ini digunakan untuk memastikan form konsultasi
+     * tampil dan tidak menampilkan kode gejala kepada user.
+     */
     public function test_consultation_form_loads_when_route_exists(): void
     {
         $this->seed();
@@ -33,6 +41,10 @@ class ExpertSystemWorkflowTest extends TestCase
         $response->assertDontSee('G08');
     }
 
+    /**
+     * Function ini digunakan untuk memastikan halaman publik
+     * tidak menampilkan kode gejala atau kode gangguan.
+     */
     public function test_public_pages_do_not_show_symptom_or_disorder_codes(): void
     {
         $this->seed();
@@ -54,6 +66,10 @@ class ExpertSystemWorkflowTest extends TestCase
         $response->assertDontSee('P02');
     }
 
+    /**
+     * Function ini digunakan untuk memastikan submit konsultasi
+     * berhasil menampilkan hasil diagnosis.
+     */
     public function test_consultation_submission_shows_a_result_when_route_exists(): void
     {
         $route = $this->routeUrl('consultation.store');
@@ -82,6 +98,10 @@ class ExpertSystemWorkflowTest extends TestCase
         ]);
     }
 
+    /**
+     * Function ini digunakan untuk memastikan dashboard admin
+     * dapat dibuka oleh user admin.
+     */
     public function test_admin_dashboard_loads_when_route_exists(): void
     {
         $route = $this->routeUrl('admin.dashboard');
@@ -93,6 +113,10 @@ class ExpertSystemWorkflowTest extends TestCase
         $response->assertOk();
     }
 
+    /**
+     * Function ini digunakan untuk memastikan user non-admin
+     * tidak bisa login ke panel admin.
+     */
     public function test_non_admin_user_cannot_login_to_admin_panel(): void
     {
         $this->skipUnlessRoutesExist(['login.store']);
@@ -112,6 +136,10 @@ class ExpertSystemWorkflowTest extends TestCase
         $this->assertGuest();
     }
 
+    /**
+     * Function ini digunakan untuk memastikan user non-admin
+     * yang sudah login tetap tidak bisa mengakses dashboard admin.
+     */
     public function test_authenticated_non_admin_user_cannot_access_admin_dashboard(): void
     {
         $route = $this->routeUrl('admin.dashboard');
@@ -126,6 +154,10 @@ class ExpertSystemWorkflowTest extends TestCase
             ->assertForbidden();
     }
 
+    /**
+     * Function ini digunakan untuk memastikan admin dapat menjalankan
+     * proses CRUD data gejala.
+     */
     public function test_admin_can_manage_symptoms_when_routes_exist(): void
     {
         $this->skipUnlessRoutesExist([
@@ -172,6 +204,10 @@ class ExpertSystemWorkflowTest extends TestCase
         $this->assertSuccessfulOrRedirect($deleteResponse->baseResponse->getStatusCode());
     }
 
+    /**
+     * Function ini digunakan untuk memastikan admin dapat menjalankan
+     * proses CRUD aturan basis pengetahuan.
+     */
     public function test_admin_can_manage_knowledge_rules_when_routes_exist(): void
     {
         $this->skipUnlessRoutesExist([
@@ -244,6 +280,10 @@ class ExpertSystemWorkflowTest extends TestCase
         ]);
     }
 
+    /**
+     * Function ini digunakan untuk memastikan service Dempster-Shafer
+     * memakai data belief dari database.
+     */
     public function test_dempster_shafer_service_uses_database_knowledge_rules(): void
     {
         $this->seed();
@@ -262,6 +302,10 @@ class ExpertSystemWorkflowTest extends TestCase
         $this->assertSame('92%', $result['percentage_text']);
     }
 
+    /**
+     * Function ini digunakan untuk memastikan data seed dan perhitungan
+     * sesuai contoh perhitungan pada Bab 3 skripsi.
+     */
     public function test_database_seed_matches_bab_three_document_example(): void
     {
         $this->seed();
@@ -275,6 +319,10 @@ class ExpertSystemWorkflowTest extends TestCase
         $this->assertSame(['P02' => 0.976, 'Theta' => 0.024], $result['masses']);
     }
 
+    /**
+     * Function ini digunakan untuk memastikan data gejala seed
+     * sesuai tabel gejala pada Bab 3 skripsi.
+     */
     public function test_database_seed_matches_bab_three_symptom_table(): void
     {
         $this->seed();
@@ -306,6 +354,10 @@ class ExpertSystemWorkflowTest extends TestCase
         }
     }
 
+    /**
+     * Function ini digunakan untuk mengambil URL route
+     * atau melewati test jika route belum tersedia.
+     */
     private function routeUrl(string $name, array $parameters = []): string
     {
         if (! Route::has($name)) {
@@ -316,6 +368,9 @@ class ExpertSystemWorkflowTest extends TestCase
     }
 
     /**
+     * Function ini digunakan untuk melewati test
+     * jika salah satu route yang dibutuhkan belum tersedia.
+     *
      * @param  array<int, string>  $names
      */
     private function skipUnlessRoutesExist(array $names): void
@@ -327,6 +382,10 @@ class ExpertSystemWorkflowTest extends TestCase
         }
     }
 
+    /**
+     * Function ini digunakan untuk membuat user admin
+     * yang dipakai saat menjalankan test panel admin.
+     */
     private function adminUser(): User
     {
         $user = User::factory()->create([
@@ -356,6 +415,9 @@ class ExpertSystemWorkflowTest extends TestCase
     }
 
     /**
+     * Function ini digunakan untuk menyiapkan data input
+     * yang dipakai saat test submit konsultasi.
+     *
      * @return array<string, mixed>
      */
     private function consultationPayload(): array
@@ -375,6 +437,9 @@ class ExpertSystemWorkflowTest extends TestCase
     }
 
     /**
+     * Function ini digunakan untuk mengambil contoh ID gejala
+     * dari database atau fallback data uji.
+     *
      * @return array<int, int|string>
      */
     private function exampleSymptomIds(): array
@@ -395,6 +460,9 @@ class ExpertSystemWorkflowTest extends TestCase
     }
 
     /**
+     * Function ini digunakan untuk menyiapkan payload gejala
+     * yang dipakai pada test CRUD admin.
+     *
      * @param  array<string, mixed>  $overrides
      * @return array<string, mixed>
      */
@@ -412,6 +480,10 @@ class ExpertSystemWorkflowTest extends TestCase
         ], $overrides);
     }
 
+    /**
+     * Function ini digunakan untuk mengambil ID gejala terbaru
+     * setelah proses penyimpanan pada test.
+     */
     private function latestSymptomId(): int
     {
         $this->assertTrue(Schema::hasTable('symptoms'), 'Tabel [symptoms] harus tersedia untuk CRUD gejala.');
@@ -424,6 +496,9 @@ class ExpertSystemWorkflowTest extends TestCase
     }
 
     /**
+     * Function ini digunakan untuk memastikan response
+     * memiliki salah satu teks yang diharapkan.
+     *
      * @param  array<int, string>  $needles
      */
     private function assertResponseContainsAnyText(string $content, array $needles): void
@@ -441,6 +516,10 @@ class ExpertSystemWorkflowTest extends TestCase
         $this->fail('Halaman hasil konsultasi harus menampilkan hasil diagnosis atau istilah Dempster-Shafer.');
     }
 
+    /**
+     * Function ini digunakan untuk memastikan response
+     * berupa status berhasil atau redirect.
+     */
     private function assertSuccessfulOrRedirect(int $status): void
     {
         $this->assertTrue(

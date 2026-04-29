@@ -7,7 +7,8 @@ use Illuminate\Support\Facades\Schema;
 return new class extends Migration
 {
     /**
-     * Run the migrations.
+     * Function ini digunakan untuk membuat tabel cache
+     * dan cache lock yang dipakai Laravel.
      */
     public function up(): void
     {
@@ -25,7 +26,8 @@ return new class extends Migration
     }
 
     /**
-     * Reverse the migrations.
+     * Function ini digunakan untuk menghapus tabel cache
+     * dan cache lock saat rollback.
      */
     public function down(): void
     {

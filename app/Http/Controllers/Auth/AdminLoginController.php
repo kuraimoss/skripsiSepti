@@ -11,11 +11,18 @@ use Illuminate\View\View;
 
 class AdminLoginController extends Controller
 {
+    /**
+     * Function ini digunakan untuk menampilkan halaman login admin.
+     */
     public function create(): View
     {
         return view('auth.login');
     }
 
+    /**
+     * Function ini digunakan untuk memproses login admin
+     * dengan validasi email, password, dan hak akses admin.
+     */
     public function store(Request $request): RedirectResponse
     {
         $credentials = $request->validate([
@@ -45,6 +52,10 @@ class AdminLoginController extends Controller
         return redirect()->intended(route('admin.dashboard'));
     }
 
+    /**
+     * Function ini digunakan untuk keluar dari sesi admin
+     * dan menghapus data autentikasi pada session.
+     */
     public function destroy(Request $request): RedirectResponse
     {
         Auth::logout();

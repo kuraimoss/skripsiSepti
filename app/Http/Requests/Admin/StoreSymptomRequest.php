@@ -7,11 +7,19 @@ use Illuminate\Validation\Rule;
 
 class StoreSymptomRequest extends FormRequest
 {
+    /**
+     * Function ini digunakan untuk mengizinkan admin
+     * menyimpan data gejala baru.
+     */
     public function authorize(): bool
     {
         return true;
     }
 
+    /**
+     * Function ini digunakan untuk menyamakan input bobot
+     * ke field belief sebelum divalidasi.
+     */
     protected function prepareForValidation(): void
     {
         $this->merge([
@@ -19,6 +27,10 @@ class StoreSymptomRequest extends FormRequest
         ]);
     }
 
+    /**
+     * Function ini digunakan untuk menentukan aturan validasi
+     * data gejala yang akan disimpan.
+     */
     public function rules(): array
     {
         return [

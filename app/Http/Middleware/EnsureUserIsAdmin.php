@@ -9,7 +9,8 @@ use Symfony\Component\HttpFoundation\Response;
 class EnsureUserIsAdmin
 {
     /**
-     * Handle an incoming request.
+     * Function ini digunakan untuk memastikan hanya user admin
+     * yang dapat mengakses halaman atau route admin.
      *
      * @param  Closure(Request): Response  $next
      */

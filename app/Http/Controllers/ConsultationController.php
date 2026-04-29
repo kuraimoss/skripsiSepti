@@ -30,6 +30,10 @@ class ConsultationController extends Controller
      */
     private array $columnCache = [];
 
+    /**
+     * Function ini digunakan untuk menampilkan form konsultasi
+     * dengan daftar gejala aktif yang dapat dipilih oleh user.
+     */
     public function create(): View
     {
         $query = Symptom::query();
@@ -47,6 +51,10 @@ class ConsultationController extends Controller
         ]);
     }
 
+    /**
+     * Function ini digunakan untuk memproses konsultasi user,
+     * menjalankan perhitungan Dempster-Shafer, lalu menyimpan hasilnya.
+     */
     public function store(
         StoreConsultationRequest $request,
         DempsterShaferService $dempsterShaferService
@@ -79,6 +87,10 @@ class ConsultationController extends Controller
         return redirect()->route('consultation.show', $consultation);
     }
 
+    /**
+     * Function ini digunakan untuk menampilkan hasil konsultasi
+     * yang sudah tersimpan di database.
+     */
     public function show(Consultation $consultation): View
     {
         $this->loadKnownRelations($consultation);
@@ -88,6 +100,10 @@ class ConsultationController extends Controller
         ]);
     }
 
+    /**
+     * Function ini digunakan untuk menampilkan versi cetak
+     * dari hasil konsultasi yang dipilih user.
+     */
     public function printResult(Consultation $consultation): View
     {
         $this->loadKnownRelations($consultation);
@@ -98,6 +114,9 @@ class ConsultationController extends Controller
     }
 
     /**
+     * Function ini digunakan untuk merapikan daftar ID gejala
+     * agar unik, berbentuk angka, dan siap diproses.
+     *
      * @param  array<int, mixed>  $symptoms
      * @return array<int, int>
      */
@@ -111,6 +130,9 @@ class ConsultationController extends Controller
     }
 
     /**
+     * Function ini digunakan untuk membuat salinan data gejala terpilih
+     * sesuai urutan pilihan user sebelum disimpan ke riwayat konsultasi.
+     *
      * @param  Collection<int, Symptom>  $symptoms
      * @param  array<int, int>  $symptomIds
      * @return array<int, array<string, mixed>>
@@ -133,6 +155,9 @@ class ConsultationController extends Controller
     }
 
     /**
+     * Function ini digunakan untuk menjalankan service Dempster-Shafer
+     * dengan method perhitungan yang tersedia pada service.
+     *
      * @param  array<string, mixed>  $patient
      * @param  array<int, int>  $symptomIds
      * @param  Collection<int, Symptom>  $symptoms
@@ -153,6 +178,9 @@ class ConsultationController extends Controller
     }
 
     /**
+     * Function ini digunakan untuk menyiapkan argument yang sesuai
+     * dengan parameter method pada service Dempster-Shafer.
+     *
      * @param  array<int, int>  $symptomIds
      * @param  Collection<int, Symptom>  $symptoms
      * @param  array<string, mixed>  $patient
@@ -206,6 +234,9 @@ class ConsultationController extends Controller
     }
 
     /**
+     * Function ini digunakan untuk mengambil kode gejala
+     * dari daftar ID gejala yang dipilih user.
+     *
      * @param  Collection<int, Symptom>  $symptoms
      * @param  array<int, int>  $symptomIds
      * @return array<int, int|string>
@@ -225,6 +256,9 @@ class ConsultationController extends Controller
     }
 
     /**
+     * Function ini digunakan untuk mengubah hasil perhitungan
+     * menjadi array agar mudah disimpan dan ditampilkan.
+     *
      * @return array<string, mixed>
      */
     private function normalizeSnapshot(mixed $value): array
@@ -253,6 +287,9 @@ class ConsultationController extends Controller
     }
 
     /**
+     * Function ini digunakan untuk menyusun data konsultasi
+     * yang akan disimpan ke tabel konsultasi.
+     *
      * @param  array<string, mixed>  $patient
      * @param  array<int, int>  $symptomIds
      * @param  array<int, array<string, mixed>>  $selectedSymptoms
@@ -390,6 +427,9 @@ class ConsultationController extends Controller
     }
 
     /**
+     * Function ini digunakan untuk menyimpan relasi gejala
+     * yang dipilih pada satu konsultasi.
+     *
      * @param  array<int, array<string, mixed>>  $selectedSymptoms
      */
     private function persistSelectedSymptoms(Consultation $consultation, array $selectedSymptoms): void
@@ -409,6 +449,9 @@ class ConsultationController extends Controller
     }
 
     /**
+     * Function ini digunakan untuk menyimpan daftar hasil diagnosis
+     * dari perhitungan Dempster-Shafer.
+     *
      * @param  array<string, mixed>  $resultSnapshot
      */
     private function persistConsultationResults(Consultation $consultation, array $resultSnapshot): void
@@ -425,6 +468,9 @@ class ConsultationController extends Controller
     }
 
     /**
+     * Function ini digunakan untuk membentuk baris hasil diagnosis
+     * yang akan disimpan pada tabel hasil konsultasi.
+     *
      * @param  array<string, mixed>  $resultSnapshot
      * @return array<int, array<string, mixed>>
      */
@@ -528,6 +574,9 @@ class ConsultationController extends Controller
     }
 
     /**
+     * Function ini digunakan untuk mengambil nilai pertama
+     * dari beberapa kemungkinan nama atribut model.
+     *
      * @param  array<int, string>  $attributes
      */
     private function firstAttribute(Model $model, array $attributes): mixed
@@ -542,6 +591,9 @@ class ConsultationController extends Controller
     }
 
     /**
+     * Function ini digunakan untuk mengambil nilai pertama
+     * dari beberapa kemungkinan key pada hasil perhitungan.
+     *
      * @param  array<string, mixed>  $result
      * @param  array<int, string>  $keys
      */
@@ -556,6 +608,10 @@ class ConsultationController extends Controller
         return null;
     }
 
+    /**
+     * Function ini digunakan untuk mengubah kode gangguan
+     * menjadi ID gangguan yang tersimpan di database.
+     */
     private function resolveDisorderId(mixed $disorder): mixed
     {
         if ($disorder === null || is_numeric($disorder)) {
@@ -577,6 +633,10 @@ class ConsultationController extends Controller
         return $disorder;
     }
 
+    /**
+     * Function ini digunakan untuk mengubah nilai keyakinan
+     * menjadi skor belief dengan rentang 0 sampai 1.
+     */
     private function confidenceScore(mixed $confidence): ?float
     {
         if (! is_numeric($confidence)) {
@@ -592,6 +652,10 @@ class ConsultationController extends Controller
         return round(max(0, min(1, $value)), 5);
     }
 
+    /**
+     * Function ini digunakan untuk mengubah nilai keyakinan
+     * menjadi persentase dengan rentang 0 sampai 100.
+     */
     private function confidencePercentage(mixed $confidence): ?float
     {
         if (! is_numeric($confidence)) {
@@ -607,6 +671,10 @@ class ConsultationController extends Controller
         return round(max(0, min(100, $value)), 2);
     }
 
+    /**
+     * Function ini digunakan untuk menentukan label kepastian
+     * berdasarkan nilai belief hasil diagnosis.
+     */
     private function certaintyLabel(mixed $confidence): ?string
     {
         $score = $this->confidenceScore($confidence);
@@ -624,6 +692,9 @@ class ConsultationController extends Controller
     }
 
     /**
+     * Function ini digunakan untuk menggabungkan data tambahan pasien
+     * menjadi catatan konsultasi yang ringkas.
+     *
      * @param  array<string, mixed>  $patient
      */
     private function patientNotes(array $patient): ?string
@@ -642,6 +713,10 @@ class ConsultationController extends Controller
         return $notes !== '' ? $notes : null;
     }
 
+    /**
+     * Function ini digunakan untuk mengubah kode pemicu stres keluarga
+     * menjadi teks yang mudah dibaca.
+     */
     private function familyStressorLabel(mixed $familyStressor): ?string
     {
         if ($familyStressor === null) {
@@ -657,12 +732,19 @@ class ConsultationController extends Controller
         };
     }
 
+    /**
+     * Function ini digunakan untuk membuat kode konsultasi baru
+     * yang unik berdasarkan tanggal dan karakter acak.
+     */
     private function newConsultationCode(): string
     {
         return 'KSL-'.now()->format('Ymd').'-'.Str::upper(Str::random(8));
     }
 
     /**
+     * Function ini digunakan untuk mencari kolom pertama
+     * yang tersedia pada tabel model tertentu.
+     *
      * @param  array<int, string>  $columns
      */
     private function firstExistingColumn(string $modelClass, array $columns): ?string
@@ -676,6 +758,10 @@ class ConsultationController extends Controller
         return null;
     }
 
+    /**
+     * Function ini digunakan untuk mengecek apakah suatu kolom
+     * tersedia pada tabel model yang diberikan.
+     */
     private function hasColumn(string $modelClass, string $column): bool
     {
         $model = new $modelClass;
@@ -688,6 +774,10 @@ class ConsultationController extends Controller
         return in_array($column, $this->columnCache[$table], true);
     }
 
+    /**
+     * Function ini digunakan untuk menyiapkan nilai sebelum disimpan,
+     * terutama saat nilai array perlu diubah menjadi JSON.
+     */
     private function valueForStorage(string $modelClass, string $column, mixed $value): mixed
     {
         if (! is_array($value)) {
@@ -703,6 +793,10 @@ class ConsultationController extends Controller
         return json_encode($value);
     }
 
+    /**
+     * Function ini digunakan untuk memuat relasi konsultasi yang dikenal
+     * agar halaman hasil dapat menampilkan data lengkap.
+     */
     private function loadKnownRelations(Consultation $consultation): void
     {
         $relations = collect(['symptoms', 'disorder', 'detectedMentalDisorder', 'results', 'consultationSymptoms'])

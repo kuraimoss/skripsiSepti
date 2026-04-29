@@ -28,7 +28,8 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class Consultation extends Model
 {
     /**
-     * Get the attributes that should be cast.
+     * Function ini digunakan untuk menentukan tipe data otomatis
+     * pada atribut konsultasi saat dibaca dari database.
      *
      * @return array<string, string>
      */
@@ -44,26 +45,46 @@ class Consultation extends Model
         ];
     }
 
+    /**
+     * Function ini digunakan untuk menghubungkan konsultasi
+     * dengan user yang membuat atau memiliki data tersebut.
+     */
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
     }
 
+    /**
+     * Function ini digunakan untuk mengambil gangguan utama
+     * yang terdeteksi pada konsultasi.
+     */
     public function detectedMentalDisorder(): BelongsTo
     {
         return $this->belongsTo(MentalDisorder::class, 'detected_mental_disorder_id');
     }
 
+    /**
+     * Function ini digunakan sebagai alias relasi
+     * menuju gangguan utama yang terdeteksi.
+     */
     public function disorder(): BelongsTo
     {
         return $this->detectedMentalDisorder();
     }
 
+    /**
+     * Function ini digunakan untuk mengambil detail gejala
+     * yang tersimpan pada satu konsultasi.
+     */
     public function consultationSymptoms(): HasMany
     {
         return $this->hasMany(ConsultationSymptom::class);
     }
 
+    /**
+     * Function ini digunakan untuk mengambil daftar gejala
+     * yang dipilih pada konsultasi melalui tabel pivot.
+     */
     public function symptoms(): BelongsToMany
     {
         return $this->belongsToMany(Symptom::class, 'consultation_symptoms')
@@ -71,56 +92,100 @@ class Consultation extends Model
             ->withTimestamps();
     }
 
+    /**
+     * Function ini digunakan untuk mengambil daftar hasil diagnosis
+     * yang dihasilkan pada konsultasi.
+     */
     public function results(): HasMany
     {
         return $this->hasMany(ConsultationResult::class);
     }
 
+    /**
+     * Function ini digunakan untuk membaca nama pasien
+     * dari atribut respondent_name.
+     */
     public function getPatientNameAttribute(): ?string
     {
         return $this->respondent_name;
     }
 
+    /**
+     * Function ini digunakan untuk membaca umur pasien
+     * dari atribut respondent_age.
+     */
     public function getAgeAttribute(): ?int
     {
         return $this->respondent_age;
     }
 
+    /**
+     * Function ini digunakan untuk membaca jenis kelamin pasien
+     * dari atribut respondent_gender.
+     */
     public function getGenderAttribute(): ?string
     {
         return $this->respondent_gender;
     }
 
+    /**
+     * Function ini digunakan untuk membaca alamat pasien
+     * dari kolom utama atau catatan konsultasi.
+     */
     public function getAddressAttribute(): ?string
     {
         return $this->respondent_address ?? $this->noteValue('Alamat');
     }
 
+    /**
+     * Function ini digunakan untuk membaca nomor telepon pasien
+     * dari kolom utama atau catatan konsultasi.
+     */
     public function getPhoneAttribute(): ?string
     {
         return $this->respondent_phone ?? $this->noteValue('Telepon');
     }
 
+    /**
+     * Function ini digunakan untuk membaca nama sekolah
+     * dari catatan tambahan konsultasi.
+     */
     public function getSchoolAttribute(): ?string
     {
         return $this->noteValue('Sekolah');
     }
 
+    /**
+     * Function ini digunakan untuk membaca nama orang tua atau wali
+     * dari catatan tambahan konsultasi.
+     */
     public function getParentGuardianAttribute(): ?string
     {
         return $this->noteValue('Orang tua/wali');
     }
 
+    /**
+     * Function ini digunakan untuk membaca pemicu stres keluarga
+     * dari catatan tambahan konsultasi.
+     */
     public function getFamilyStressorAttribute(): ?string
     {
         return $this->noteValue('Pemicu stres');
     }
 
+    /**
+     * Function ini digunakan untuk membaca catatan tambahan
+     * dari data konsultasi.
+     */
     public function getAdditionalNotesAttribute(): ?string
     {
         return $this->noteValue('Catatan');
     }
 
+    /**
+     * Function ini digunakan untuk mengambil hasil diagnosis utama
+     * dari daftar hasil konsultasi.
+     */
     public function getPrimaryResultAttribute(): ?ConsultationResult
     {
         if ($this->relationLoaded('results')) {
@@ -137,6 +202,10 @@ class Consultation extends Model
             ->first();
     }
 
+    /**
+     * Function ini digunakan untuk mengambil nilai tertentu
+     * dari catatan konsultasi berdasarkan label teks.
+     */
     private function noteValue(string $label): ?string
     {
         foreach (preg_split('/\R/', (string) $this->notes) ?: [] as $line) {

@@ -6,11 +6,19 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class StoreConsultationRequest extends FormRequest
 {
+    /**
+     * Function ini digunakan untuk mengizinkan admin
+     * menyimpan data riwayat konsultasi.
+     */
     public function authorize(): bool
     {
         return true;
     }
 
+    /**
+     * Function ini digunakan untuk menentukan aturan validasi
+     * saat admin menambahkan riwayat konsultasi.
+     */
     public function rules(): array
     {
         return [

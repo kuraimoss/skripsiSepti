@@ -7,11 +7,19 @@ use Illuminate\Validation\Rule;
 
 class StoreDisorderRequest extends FormRequest
 {
+    /**
+     * Function ini digunakan untuk mengizinkan admin
+     * menyimpan data gangguan baru.
+     */
     public function authorize(): bool
     {
         return true;
     }
 
+    /**
+     * Function ini digunakan untuk menyamakan input rekomendasi
+     * ke field solution sebelum divalidasi.
+     */
     protected function prepareForValidation(): void
     {
         $this->merge([
@@ -19,6 +27,10 @@ class StoreDisorderRequest extends FormRequest
         ]);
     }
 
+    /**
+     * Function ini digunakan untuk menentukan aturan validasi
+     * data gangguan yang akan disimpan.
+     */
     public function rules(): array
     {
         return [

@@ -7,7 +7,8 @@ use Illuminate\Support\Facades\Schema;
 return new class extends Migration
 {
     /**
-     * Run the migrations.
+     * Function ini digunakan untuk menambahkan kolom alamat
+     * dan telepon responden pada tabel konsultasi.
      */
     public function up(): void
     {
@@ -23,7 +24,8 @@ return new class extends Migration
     }
 
     /**
-     * Reverse the migrations.
+     * Function ini digunakan untuk menghapus kolom alamat
+     * dan telepon responden saat rollback.
      */
     public function down(): void
     {

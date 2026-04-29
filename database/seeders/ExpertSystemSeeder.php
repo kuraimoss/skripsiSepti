@@ -10,7 +10,8 @@ use Illuminate\Database\Seeder;
 class ExpertSystemSeeder extends Seeder
 {
     /**
-     * Seed the expert system master data.
+     * Function ini digunakan untuk mengisi data awal sistem pakar
+     * berupa gangguan, gejala, dan aturan basis pengetahuan.
      */
     public function run(): void
     {

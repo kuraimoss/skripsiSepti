@@ -8,11 +8,19 @@ use Illuminate\Validation\Rule;
 
 class UpdateDisorderRequest extends FormRequest
 {
+    /**
+     * Function ini digunakan untuk mengizinkan admin
+     * memperbarui data gangguan.
+     */
     public function authorize(): bool
     {
         return true;
     }
 
+    /**
+     * Function ini digunakan untuk menyamakan input rekomendasi
+     * ke field solution sebelum divalidasi.
+     */
     protected function prepareForValidation(): void
     {
         $this->merge([
@@ -20,6 +28,10 @@ class UpdateDisorderRequest extends FormRequest
         ]);
     }
 
+    /**
+     * Function ini digunakan untuk menentukan aturan validasi
+     * data gangguan yang sedang diperbarui.
+     */
     public function rules(): array
     {
         return [
@@ -31,6 +43,10 @@ class UpdateDisorderRequest extends FormRequest
         ];
     }
 
+    /**
+     * Function ini digunakan untuk mengambil ID model
+     * dari parameter route yang sedang diproses.
+     */
     private function routeKey(string $parameter): mixed
     {
         $value = $this->route($parameter);
