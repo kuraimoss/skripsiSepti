@@ -22,7 +22,7 @@
                     <p class="mt-2 text-sm font-medium text-slate-700">{{ data_get($expert, 'role') }} - {{ data_get($expert, 'organization') }}</p>
                     <p class="mt-5 max-w-3xl text-sm leading-7 text-slate-600">{{ data_get($expert, 'summary') }}</p>
                 </div>
-            <img src="{{ asset('images/expert-profile.jpg') }}" alt="Terapis mencatat hasil konsultasi pasien" class="w-full rounded-lg border border-slate-200 bg-white object-cover shadow-sm">
+            <img src="{{ asset('images/expert-profile.svg') }}" alt="Ilustrasi pakar kesehatan memvalidasi basis pengetahuan" class="w-full rounded-lg border border-slate-200 bg-white object-cover shadow-sm">
             </div>
 
             <div class="mt-6 grid gap-4 md:grid-cols-3">

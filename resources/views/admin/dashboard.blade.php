@@ -32,7 +32,7 @@
             <h2 class="mt-3 text-xl font-semibold tracking-normal text-slate-950">Pantau data sistem pakar dari satu panel.</h2>
             <p class="mt-2 max-w-2xl text-sm leading-6 text-slate-600">Dashboard membantu admin melihat jumlah data utama, riwayat konsultasi, dan distribusi hasil tanpa masuk ke tiap menu satu per satu.</p>
         </div>
-                    <img src="{{ asset('images/admin-dashboard.jpg') }}" alt="Workspace admin kesehatan dengan laptop dan stetoskop" class="w-full rounded-md border border-slate-200 bg-slate-50 object-cover">
+                    <img src="{{ asset('images/admin-dashboard.svg') }}" alt="Ilustrasi dashboard admin sistem kesehatan" class="w-full rounded-md border border-slate-200 bg-slate-50 object-cover">
     </section>
 
     <div class="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
