@@ -98,7 +98,10 @@
             <footer class="no-print border-t border-slate-200 bg-white">
                 <div class="mx-auto flex max-w-7xl flex-col gap-2 px-4 py-5 text-sm text-slate-500 sm:px-6 md:flex-row md:items-center md:justify-between lg:px-8">
                     <p>&copy; {{ date('Y') }} {{ $appName }}</p>
-                    <p>Deteksi awal, bukan diagnosis klinis.</p>
+                    <p>
+                        Deteksi awal, bukan diagnosis klinis.
+                        <span class="block md:inline">Ilustrasi oleh <a href="https://storyset.com/medical" class="font-medium text-slate-600 underline decoration-slate-300 underline-offset-4 hover:text-slate-900" target="_blank" rel="noopener noreferrer">Storyset</a>.</span>
+                    </p>
                 </div>
             </footer>
         </div>

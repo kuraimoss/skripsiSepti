@@ -15,6 +15,10 @@ Aplikasi web Laravel untuk deteksi awal gangguan kesehatan mental remaja akibat 
 
 Database yang dipakai project ini hanya MySQL.
 
+## Atribusi Asset
+
+- Ilustrasi hero menggunakan asset `Online doctor` dari [Storyset by Freepik](https://storyset.com/medical).
+
 ## Clone Project
 
 Jalankan perintah berikut dari CMD.
