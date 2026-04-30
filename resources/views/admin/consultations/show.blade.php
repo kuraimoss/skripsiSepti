@@ -35,7 +35,7 @@
 @endphp
 
 @section('header_actions')
-    <a href="{{ $printUrl }}" class="inline-flex items-center justify-center gap-2 rounded-md border border-slate-300 bg-white px-4 py-2 text-sm font-semibold text-slate-700 transition hover:bg-slate-100">
+    <a href="{{ $printUrl }}" class="inline-flex w-full items-center justify-center gap-2 rounded-md border border-slate-300 bg-white px-4 py-2 text-sm font-semibold text-slate-700 transition hover:bg-slate-100 sm:w-auto">
         <x-icon name="printer" class="size-4" />
         Cetak
     </a>

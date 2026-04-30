@@ -38,13 +38,13 @@
                     </a>
                 </div>
 
-                <nav class="flex gap-2 overflow-x-auto px-4 pb-4 lg:block lg:space-y-1 lg:px-4" aria-label="Navigasi admin">
+                <nav class="mobile-nav-scroll flex snap-x gap-2 overflow-x-auto px-4 pb-4 lg:block lg:space-y-1 lg:px-4" aria-label="Navigasi admin">
                     @foreach ($adminNav as $item)
                         @php
                             $href = \Illuminate\Support\Facades\Route::has($item['route']) ? route($item['route']) : '#';
                             $active = request()->routeIs($item['route']) || request()->routeIs(str_replace('.index', '.*', $item['route']));
                         @endphp
-                        <a href="{{ $href }}" class="inline-flex shrink-0 items-center gap-2 rounded-md px-3 py-2 text-sm font-medium transition lg:flex {{ $active ? 'bg-teal-700 text-white' : 'text-slate-600 hover:bg-white hover:text-slate-950' }}">
+                        <a href="{{ $href }}" class="inline-flex shrink-0 snap-start items-center gap-2 rounded-md px-3 py-2 text-sm font-medium transition lg:flex {{ $active ? 'bg-teal-700 text-white' : 'text-slate-600 hover:bg-white hover:text-slate-950' }}">
                             <x-icon :name="$item['icon']" class="size-4" />
                             {{ $item['label'] }}
                         </a>
@@ -58,7 +58,7 @@
                         <p class="text-xs font-semibold uppercase tracking-wide text-teal-700">Panel Admin</p>
                         <div class="flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
                             <div>
-                                <h1 class="text-2xl font-semibold tracking-normal text-slate-950">{{ $heading ?? $pageTitle }}</h1>
+                                <h1 class="text-xl font-semibold tracking-normal text-slate-950 sm:text-2xl">{{ $heading ?? $pageTitle }}</h1>
                                 @isset($subheading)
                                     <p class="mt-1 max-w-3xl text-sm leading-6 text-slate-500">{{ $subheading }}</p>
                                 @endisset

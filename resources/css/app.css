@@ -57,6 +57,61 @@
     }
 }
 
+@media (max-width: 768px) {
+    html,
+    body {
+        max-width: 100%;
+        overflow-x: hidden;
+    }
+
+    main,
+    section,
+    article,
+    header,
+    footer,
+    form {
+        min-width: 0;
+    }
+
+    img {
+        height: auto;
+        max-width: 100%;
+    }
+
+    input,
+    select,
+    textarea {
+        font-size: 16px;
+    }
+
+    .overflow-x-auto {
+        max-width: 100%;
+        -webkit-overflow-scrolling: touch;
+        overscroll-behavior-inline: contain;
+    }
+
+    .overflow-x-auto > table {
+        min-width: 44rem;
+    }
+
+    .overflow-x-auto th,
+    .overflow-x-auto td {
+        white-space: nowrap;
+    }
+
+    .overflow-x-auto td p {
+        white-space: normal;
+    }
+
+    .mobile-nav-scroll {
+        scrollbar-width: none;
+    }
+
+    .mobile-nav-scroll::-webkit-scrollbar {
+        display: none;
+    }
+}
+
 @media print {
     @page {
         margin: 16mm;

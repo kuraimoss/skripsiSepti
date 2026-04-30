@@ -16,7 +16,7 @@
                         <x-icon name="clipboard-list" class="size-4" />
                         Konsultasi
                     </p>
-                    <h1 class="mt-3 text-3xl font-semibold leading-tight tracking-normal text-slate-950">Isi data singkat dan pilih gejala.</h1>
+                    <h1 class="mt-3 text-2xl font-semibold leading-tight tracking-normal text-slate-950 sm:text-3xl">Isi data singkat dan pilih gejala.</h1>
                     <p class="mt-3 text-sm leading-6 text-slate-600">Hasil hanya sebagai deteksi awal, bukan diagnosis klinis.</p>
                 </div>
             <img src="{{ asset('images/consultation-form.svg') }}" alt="Ilustrasi form skrining kesehatan dan stetoskop" class="w-full rounded-lg border border-slate-200 bg-slate-50 object-cover shadow-sm">

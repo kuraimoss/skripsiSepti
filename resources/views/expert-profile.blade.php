@@ -18,7 +18,7 @@
                         <x-icon name="user-round" class="size-4" />
                         Profil pakar
                     </p>
-                    <h1 class="mt-3 text-3xl font-semibold tracking-normal text-slate-950">{{ data_get($expert, 'name') }}</h1>
+                    <h1 class="mt-3 text-2xl font-semibold tracking-normal text-slate-950 sm:text-3xl">{{ data_get($expert, 'name') }}</h1>
                     <p class="mt-2 text-sm font-medium text-slate-700">{{ data_get($expert, 'role') }} - {{ data_get($expert, 'organization') }}</p>
                     <p class="mt-5 max-w-3xl text-sm leading-7 text-slate-600">{{ data_get($expert, 'summary') }}</p>
                 </div>

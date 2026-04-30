@@ -9,7 +9,7 @@
                     <x-icon name="shield-check" class="size-4" />
                     Panel Admin
                 </p>
-                <h1 class="mt-3 max-w-xl text-3xl font-semibold leading-tight tracking-normal text-slate-950">Masuk untuk mengelola sistem.</h1>
+                <h1 class="mt-3 max-w-xl text-2xl font-semibold leading-tight tracking-normal text-slate-950 sm:text-3xl">Masuk untuk mengelola sistem.</h1>
                 <p class="mt-4 max-w-xl text-sm leading-6 text-slate-600">Gunakan akun admin yang tersedia di database.</p>
             </div>
 

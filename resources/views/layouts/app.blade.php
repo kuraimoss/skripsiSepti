@@ -57,12 +57,12 @@
                     </div>
                 </div>
 
-                <nav class="mx-auto flex max-w-7xl gap-2 overflow-x-auto px-4 pb-3 sm:px-6 md:hidden" aria-label="Navigasi mobile">
+                <nav class="mobile-nav-scroll mx-auto flex max-w-7xl snap-x gap-2 overflow-x-auto px-4 pb-3 sm:px-6 md:hidden" aria-label="Navigasi mobile">
                     @foreach ($publicNav as $item)
                         @php
                             $href = \Illuminate\Support\Facades\Route::has($item['route']) ? route($item['route']) : $item['fallback'];
                         @endphp
-                        <a href="{{ $href }}" class="inline-flex shrink-0 items-center gap-2 rounded-md border border-slate-200 bg-white px-3 py-2 text-xs font-semibold text-slate-700">
+                        <a href="{{ $href }}" class="inline-flex shrink-0 snap-start items-center justify-center gap-2 rounded-md border border-slate-200 bg-white px-3 py-2 text-xs font-semibold text-slate-700">
                             <x-icon :name="$item['icon']" class="size-3.5" />
                             {{ $item['label'] }}
                         </a>

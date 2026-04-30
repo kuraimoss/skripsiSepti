@@ -50,7 +50,7 @@
                         <x-icon name="clipboard-check" class="size-4" />
                         Hasil konsultasi
                     </p>
-                    <h1 class="mt-3 text-3xl font-semibold tracking-normal text-slate-950">Ringkasan deteksi awal</h1>
+                    <h1 class="mt-3 text-2xl font-semibold tracking-normal text-slate-950 sm:text-3xl">Ringkasan deteksi awal</h1>
                     <p class="mt-2 text-sm leading-6 text-slate-500">{{ $createdLabel }}</p>
                 </div>
                 <div class="flex flex-col gap-3 sm:flex-row">

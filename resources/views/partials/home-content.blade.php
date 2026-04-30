@@ -1,8 +1,8 @@
 <section class="bg-white">
-    <div class="mx-auto grid max-w-7xl gap-10 px-4 py-14 sm:px-6 lg:grid-cols-[1.05fr_0.95fr] lg:px-8 lg:py-20">
+    <div class="mx-auto grid max-w-7xl gap-10 px-4 py-10 sm:px-6 sm:py-14 lg:grid-cols-[1.05fr_0.95fr] lg:px-8 lg:py-20">
         <div class="flex flex-col justify-center">
             <p class="text-sm font-semibold text-teal-700">Sistem pakar kesehatan mental remaja</p>
-            <h1 class="mt-4 max-w-3xl text-4xl font-semibold leading-tight tracking-normal text-slate-950 lg:text-5xl">
+            <h1 class="mt-4 max-w-3xl text-3xl font-semibold leading-tight tracking-normal text-slate-950 sm:text-4xl lg:text-5xl">
                 Deteksi awal yang tenang, jelas, dan mudah dipahami.
             </h1>
             <p class="mt-5 max-w-2xl text-base leading-7 text-slate-600">

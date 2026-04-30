@@ -13,7 +13,7 @@
                         <x-icon name="book-open" class="size-4" />
                         Info gangguan
                     </p>
-                    <h1 class="mt-3 text-3xl font-semibold tracking-normal text-slate-950">Data gangguan yang dipakai sistem.</h1>
+                    <h1 class="mt-3 text-2xl font-semibold tracking-normal text-slate-950 sm:text-3xl">Data gangguan yang dipakai sistem.</h1>
                     <p class="mt-3 text-sm leading-6 text-slate-600">Ringkasan singkat dari basis pengetahuan. Hasil sistem tetap perlu ditinjau tenaga profesional.</p>
                 </div>
             <img src="{{ asset('images/info-disorders.svg') }}" alt="Ilustrasi edukasi kesehatan mental dan data gangguan" class="w-full rounded-lg border border-slate-200 bg-slate-50 object-cover shadow-sm">

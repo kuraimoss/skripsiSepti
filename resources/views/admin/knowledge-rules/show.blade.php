@@ -5,7 +5,7 @@
 ])
 
 @section('header_actions')
-    <a href="{{ route('admin.knowledge-rules.edit', $rule) }}" class="inline-flex items-center justify-center gap-2 rounded-md bg-teal-700 px-4 py-2 text-sm font-semibold text-white transition hover:bg-teal-800">
+    <a href="{{ route('admin.knowledge-rules.edit', $rule) }}" class="inline-flex w-full items-center justify-center gap-2 rounded-md bg-teal-700 px-4 py-2 text-sm font-semibold text-white transition hover:bg-teal-800 sm:w-auto">
         <x-icon name="edit-3" class="size-4" />
         Edit
     </a>
