@@ -21,15 +21,12 @@ Database yang dipakai project ini hanya MySQL.
 
 ## Clone Project
 
-Jalankan perintah berikut dari CMD.
+Pilih folder penyimpanan project di komputer, lalu jalankan perintah berikut dari CMD.
 
 ```cmd
-cd /d E:\joki
-git clone https://github.com/kuraimoss/skripsiSepti.git septi
-cd septi
+git clone https://github.com/kuraimoss/skripsiSepti.git nama_folder_project
+cd nama_folder_project
 ```
-
-Jika folder tujuan berbeda, sesuaikan path `cd` dengan lokasi project di komputer.
 
 ## Install Dependency
 
@@ -74,14 +71,14 @@ Pastikan konfigurasi database di `.env` memakai MySQL seperti berikut.
 DB_CONNECTION=mysql
 DB_HOST=127.0.0.1
 DB_PORT=3306
-DB_DATABASE=septi
+DB_DATABASE=nama_database
 DB_USERNAME=root
 DB_PASSWORD=
 ```
 
 Keterangan:
 
-- `DB_DATABASE=septi` adalah nama database yang akan dibuat.
+- `DB_DATABASE=nama_database` adalah nama database yang akan dibuat.
 - `DB_USERNAME=root` adalah user default MySQL XAMPP.
 - `DB_PASSWORD=` dikosongkan jika MySQL XAMPP tidak memakai password.
 
@@ -92,16 +89,16 @@ Nyalakan MySQL dari XAMPP Control Panel terlebih dahulu.
 Lalu buat database melalui CMD:
 
 ```cmd
-C:\xampp\mysql\bin\mysql.exe -u root -e "CREATE DATABASE IF NOT EXISTS septi CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;"
+C:\xampp\mysql\bin\mysql.exe -u root -e "CREATE DATABASE IF NOT EXISTS nama_database CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;"
 ```
 
 Jika MySQL memakai password, gunakan perintah ini lalu masukkan password saat diminta:
 
 ```cmd
-C:\xampp\mysql\bin\mysql.exe -u root -p -e "CREATE DATABASE IF NOT EXISTS septi CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;"
+C:\xampp\mysql\bin\mysql.exe -u root -p -e "CREATE DATABASE IF NOT EXISTS nama_database CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;"
 ```
 
-Database juga bisa dibuat dari phpMyAdmin dengan nama `septi`.
+Database juga bisa dibuat dari phpMyAdmin dengan nama yang sama seperti nilai `DB_DATABASE`.
 
 ## Migrasi dan Seeder Database
 
@@ -174,9 +171,8 @@ Login admin memakai akun bawaan dari seeder.
 Jika ingin menjalankan project dari nol, gunakan urutan ini.
 
 ```cmd
-cd /d E:\joki
-git clone https://github.com/kuraimoss/skripsiSepti.git septi
-cd septi
+git clone https://github.com/kuraimoss/skripsiSepti.git nama_folder_project
+cd nama_folder_project
 
 composer install
 npm install
@@ -184,7 +180,7 @@ npm install
 copy .env.example .env
 php artisan key:generate
 
-C:\xampp\mysql\bin\mysql.exe -u root -e "CREATE DATABASE IF NOT EXISTS septi CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;"
+C:\xampp\mysql\bin\mysql.exe -u root -e "CREATE DATABASE IF NOT EXISTS nama_database CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;"
 
 php artisan migrate --seed
 npm run build
@@ -221,7 +217,7 @@ vendor\bin\pint --test
 
 Jika muncul error `Access denied for user`, cek kembali `DB_USERNAME` dan `DB_PASSWORD` di `.env`.
 
-Jika muncul error database tidak ditemukan, pastikan database `septi` sudah dibuat di MySQL.
+Jika muncul error database tidak ditemukan, pastikan database sesuai nilai `DB_DATABASE` sudah dibuat di MySQL.
 
 Jika perubahan `.env` belum terbaca, jalankan:
 
