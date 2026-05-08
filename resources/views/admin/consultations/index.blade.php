@@ -38,7 +38,6 @@
                         @php
                             $key = data_get($consultation, 'id');
                             $showUrl = \Illuminate\Support\Facades\Route::has('admin.consultations.show') && filled($key) ? route('admin.consultations.show', $key) : '#';
-                            $deleteUrl = \Illuminate\Support\Facades\Route::has('admin.consultations.destroy') && filled($key) ? route('admin.consultations.destroy', $key) : '#';
                         @endphp
                         <tr class="hover:bg-slate-50">
                             <td class="px-5 py-4">
@@ -55,14 +54,6 @@
                                         <x-icon name="book-open" class="size-3.5" />
                                         Detail
                                     </a>
-                                    <form method="POST" action="{{ $deleteUrl }}" onsubmit="return confirm('Hapus riwayat konsultasi ini?')">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit" class="inline-flex items-center gap-1.5 rounded-md border border-rose-200 px-3 py-1.5 text-xs font-semibold text-rose-700 transition hover:bg-rose-50">
-                                            <x-icon name="trash-2" class="size-3.5" />
-                                            Hapus
-                                        </button>
-                                    </form>
                                 </div>
                             </td>
                         </tr>

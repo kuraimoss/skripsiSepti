@@ -9,35 +9,35 @@
     --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
         'Segoe UI Symbol', 'Noto Color Emoji';
 
-    --color-teal-50: #f2eae0;
-    --color-teal-100: #eadfeb;
-    --color-teal-200: #d8c5df;
-    --color-teal-300: #bda6ce;
-    --color-teal-400: #ab99ca;
-    --color-teal-500: #9b8ec7;
-    --color-teal-600: #8979b8;
-    --color-teal-700: #7765a8;
-    --color-teal-800: #63538e;
-    --color-teal-900: #504373;
-    --color-teal-950: #312945;
+    --color-teal-50: #fff7ff;
+    --color-teal-100: #ffdbfd;
+    --color-teal-200: #eadfff;
+    --color-teal-300: #c9beff;
+    --color-teal-400: #aeb2ff;
+    --color-teal-500: #8494ff;
+    --color-teal-600: #747dff;
+    --color-teal-700: #6367ff;
+    --color-teal-800: #5054d6;
+    --color-teal-900: #393ca0;
+    --color-teal-950: #25265f;
 
-    --color-slate-50: #fffaf5;
-    --color-slate-100: #f2eae0;
-    --color-slate-200: #e4dacf;
-    --color-slate-300: #cfc2b8;
-    --color-slate-400: #9f96a5;
-    --color-slate-500: #746d7b;
-    --color-slate-600: #5f5867;
-    --color-slate-700: #4c4656;
-    --color-slate-800: #393340;
-    --color-slate-900: #2c2633;
-    --color-slate-950: #211c28;
+    --color-slate-50: #fff7ff;
+    --color-slate-100: #ffdbfd;
+    --color-slate-200: #eadfff;
+    --color-slate-300: #c9beff;
+    --color-slate-400: #aeb2ff;
+    --color-slate-500: #6f7292;
+    --color-slate-600: #555774;
+    --color-slate-700: #42445d;
+    --color-slate-800: #303247;
+    --color-slate-900: #24263a;
+    --color-slate-950: #17182a;
 
-    --color-amber-50: #f3f8f9;
-    --color-amber-100: #e5f0f2;
-    --color-amber-200: #b4d3d9;
-    --color-amber-800: #607f86;
-    --color-amber-900: #354d53;
+    --color-amber-50: #fff7ff;
+    --color-amber-100: #ffdbfd;
+    --color-amber-200: #c9beff;
+    --color-amber-800: #6367ff;
+    --color-amber-900: #25265f;
 }
 
 @layer base {
@@ -46,13 +46,13 @@
     }
 
     body {
-        background: #f2eae0;
-        color: #211c28;
+        background: #ffdbfd;
+        color: #17182a;
         text-rendering: optimizeLegibility;
     }
 
     :focus-visible {
-        outline: 3px solid color-mix(in oklab, #9b8ec7 55%, transparent);
+        outline: 3px solid color-mix(in oklab, #6367ff 55%, transparent);
         outline-offset: 3px;
     }
 }
