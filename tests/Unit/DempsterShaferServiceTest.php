@@ -46,6 +46,25 @@ class DempsterShaferServiceTest extends TestCase
     }
 
     /**
+     * Function ini digunakan untuk memastikan gejala yang dimiliki dua gangguan
+     * tetap menghasilkan hipotesis gabungan sesuai basis pengetahuan skripsi.
+     */
+    public function test_shared_symptom_returns_composite_hypothesis_and_correct_certainty_label(): void
+    {
+        $service = new DempsterShaferService;
+
+        $result = $service->diagnose(['G08']);
+
+        $this->assertSame('P01,P02', $result['result']['code']);
+        $this->assertSame('Depresi (depressive disorder) / Gangguan kecemasan (anxiety)', $result['result']['name']);
+        $this->assertSame(0.5, $result['belief']);
+        $this->assertSame(50.0, $result['percentage']);
+        $this->assertSame('50%', $result['percentage_text']);
+        $this->assertSame('Cukup Pasti', $result['certainty_label']);
+        $this->assertSame(['P01,P02' => 0.5, 'Theta' => 0.5], $result['masses']);
+    }
+
+    /**
      * Function ini digunakan untuk memastikan input gejala kosong
      * menghasilkan hasil deteksi kosong yang aman.
      */

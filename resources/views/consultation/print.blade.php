@@ -15,17 +15,20 @@
 
     $results = collect($results ?? data_get($consultation ?? null, 'results', []));
     $primaryResult = $primaryResult ?? data_get($consultation ?? null, 'primary_result') ?? $results->first();
+    $primaryName = data_get($consultation ?? null, 'display_result_name')
+        ?: data_get($primaryResult, 'disorder.name', data_get($primaryResult, 'name', 'Hasil belum tersedia'));
     $selectedSymptoms = collect($selectedSymptoms ?? data_get($consultation ?? null, 'symptoms', []));
     $recommendations = collect($recommendations ?? data_get($primaryResult, 'recommendations', data_get($consultation ?? null, 'recommendations', [])));
     $createdAt = data_get($consultation ?? null, 'created_at');
     $createdLabel = $createdAt instanceof \DateTimeInterface ? $createdAt->format('d/m/Y H:i') : ($createdAt ?: date('d/m/Y H:i'));
     $additionalNotes = data_get($consultation ?? null, 'additional_notes');
-    $confidence = data_get($primaryResult, 'belief', data_get($primaryResult, 'confidence', data_get($primaryResult, 'percentage', 0)));
+    $confidence = data_get($consultation ?? null, 'display_confidence_percentage');
+    $confidence = $confidence ?? data_get($primaryResult, 'belief', data_get($primaryResult, 'confidence', data_get($primaryResult, 'percentage', 0)));
     $confidenceScore = (float) $confidence;
     if ($confidenceScore > 1 && $confidenceScore <= 100) {
         $confidenceScore = $confidenceScore / 100;
     }
-    $certaintyLabel = data_get($consultation ?? null, 'certainty_label') ?: match (true) {
+    $certaintyLabel = data_get($consultation ?? null, 'display_certainty_label') ?: match (true) {
         $confidenceScore >= 1.0 => 'Sangat Pasti',
         $confidenceScore >= 0.75 => 'Pasti',
         $confidenceScore >= 0.50 => 'Cukup Pasti',
@@ -94,7 +97,7 @@
                 <p class="text-sm font-semibold uppercase tracking-wide text-slate-500">Hasil utama</p>
                 <div class="mt-3 flex items-start justify-between gap-4">
                     <div>
-                        <h2 class="text-xl font-semibold">{{ data_get($primaryResult, 'disorder.name', data_get($primaryResult, 'name', 'Hasil belum tersedia')) }}</h2>
+                        <h2 class="text-xl font-semibold">{{ $primaryName }}</h2>
                     </div>
                     <div class="text-right">
                         <p class="text-xl font-semibold">{{ $formatPercent($confidence) }}</p>

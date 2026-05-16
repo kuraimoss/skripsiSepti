@@ -29,6 +29,12 @@
 
     $results = collect($results ?? data_get($consultation ?? null, 'results', []));
     $primaryResult = $primaryResult ?? data_get($consultation ?? null, 'primary_result') ?? $results->first();
+    $primaryName = data_get($consultation ?? null, 'display_result_name')
+        ?: data_get($primaryResult, 'disorder.name', data_get($primaryResult, 'name', 'Hasil belum tersedia'));
+    $primaryCode = data_get($consultation ?? null, 'display_result_code')
+        ?: data_get($primaryResult, 'disorder.code', data_get($primaryResult, 'code', '-'));
+    $confidence = data_get($consultation ?? null, 'display_confidence_percentage');
+    $confidence = $confidence ?? data_get($primaryResult, 'belief', data_get($primaryResult, 'confidence', data_get($primaryResult, 'percentage', 0)));
     $selectedSymptoms = collect($selectedSymptoms ?? data_get($consultation ?? null, 'symptoms', []));
     $consultationId = data_get($consultation ?? null, 'id');
     $printUrl = \Illuminate\Support\Facades\Route::has('consultation.print') && filled($consultationId) ? route('consultation.print', $consultationId) : '#';
@@ -91,13 +97,13 @@
             </p>
             <div class="mt-4 flex items-start justify-between gap-4">
                 <div>
-                    <h2 class="text-2xl font-semibold tracking-normal text-teal-950">{{ data_get($primaryResult, 'disorder.name', data_get($primaryResult, 'name', 'Hasil belum tersedia')) }}</h2>
-                    <p class="mt-1 text-sm font-medium text-teal-800">Kode: {{ data_get($primaryResult, 'disorder.code', data_get($primaryResult, 'code', '-')) }}</p>
+                    <h2 class="text-2xl font-semibold tracking-normal text-teal-950">{{ $primaryName }}</h2>
+                    <p class="mt-1 text-sm font-medium text-teal-800">Kode: {{ $primaryCode ?: '-' }}</p>
                 </div>
-                <span class="rounded-md bg-white px-3 py-1 text-sm font-semibold text-teal-800 shadow-sm">{{ $formatPercent(data_get($primaryResult, 'belief', data_get($primaryResult, 'confidence', data_get($primaryResult, 'percentage', 0)))) }}</span>
+                <span class="rounded-md bg-white px-3 py-1 text-sm font-semibold text-teal-800 shadow-sm">{{ $formatPercent($confidence) }}</span>
             </div>
             <div class="mt-6 h-3 overflow-hidden rounded-full bg-white">
-                <div class="h-full rounded-full bg-teal-700" style="width: {{ $percentNumber(data_get($primaryResult, 'belief', data_get($primaryResult, 'confidence', data_get($primaryResult, 'percentage', 0)))) }}%"></div>
+                <div class="h-full rounded-full bg-teal-700" style="width: {{ $percentNumber($confidence) }}%"></div>
             </div>
             <p class="mt-4 text-sm leading-6 text-teal-900">{{ data_get($primaryResult, 'description', 'Interpretasi utama berdasarkan evidence yang dipilih pasien.') }}</p>
         </section>

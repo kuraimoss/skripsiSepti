@@ -13,6 +13,18 @@
     ]);
     $recentConsultations = collect($recentConsultations ?? []);
     $topDisorders = collect($topDisorders ?? []);
+    $formatPercent = function ($value) {
+        if ($value === null || $value === '' || $value === '-') {
+            return '-';
+        }
+
+        $number = (float) $value;
+        if ($number <= 1) {
+            $number *= 100;
+        }
+
+        return rtrim(rtrim(number_format($number, 2), '0'), '.') . '%';
+    };
 @endphp
 
 @section('header_actions')
@@ -89,10 +101,14 @@
                     </thead>
                     <tbody class="divide-y divide-slate-200">
                         @forelse ($recentConsultations as $consultation)
+                            @php
+                                $belief = data_get($consultation, 'display_confidence_percentage');
+                                $belief = $belief ?? data_get($consultation, 'primary_result.belief', data_get($consultation, 'confidence', '-'));
+                            @endphp
                             <tr class="hover:bg-slate-50">
                                 <td class="px-5 py-4 font-medium text-slate-950">{{ data_get($consultation, 'patient_name', '-') }}</td>
-                                <td class="px-5 py-4 text-slate-600">{{ data_get($consultation, 'primary_result.disorder.name', data_get($consultation, 'primary_result.name', '-')) }}</td>
-                                <td class="px-5 py-4 text-slate-600">{{ data_get($consultation, 'primary_result.belief', data_get($consultation, 'confidence', '-')) }}</td>
+                                <td class="px-5 py-4 text-slate-600">{{ data_get($consultation, 'display_result_name') ?: data_get($consultation, 'primary_result.disorder.name', data_get($consultation, 'primary_result.name', '-')) }}</td>
+                                <td class="px-5 py-4 text-slate-600">{{ $formatPercent($belief) }}</td>
                                 <td class="px-5 py-4 text-slate-600">{{ data_get($consultation, 'created_at', '-') }}</td>
                             </tr>
                         @empty

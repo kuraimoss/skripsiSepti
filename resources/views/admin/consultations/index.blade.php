@@ -7,6 +7,18 @@
 @php
     $consultationItems = is_object($consultations ?? null) && method_exists($consultations, 'items') ? collect($consultations->items()) : collect($consultations ?? []);
     $indexUrl = \Illuminate\Support\Facades\Route::has('admin.consultations.index') ? route('admin.consultations.index') : '#';
+    $formatPercent = function ($value) {
+        if ($value === null || $value === '' || $value === '-') {
+            return '-';
+        }
+
+        $number = (float) $value;
+        if ($number <= 1) {
+            $number *= 100;
+        }
+
+        return rtrim(rtrim(number_format($number, 2), '0'), '.') . '%';
+    };
 @endphp
 
 @section('content')
@@ -38,14 +50,16 @@
                         @php
                             $key = data_get($consultation, 'id');
                             $showUrl = \Illuminate\Support\Facades\Route::has('admin.consultations.show') && filled($key) ? route('admin.consultations.show', $key) : '#';
+                            $belief = data_get($consultation, 'display_confidence_percentage');
+                            $belief = $belief ?? data_get($consultation, 'primary_result.belief', data_get($consultation, 'confidence', '-'));
                         @endphp
                         <tr class="hover:bg-slate-50">
                             <td class="px-5 py-4">
                                 <p class="font-semibold text-slate-950">{{ data_get($consultation, 'patient_name', '-') }}</p>
                                 <p class="mt-1 text-xs text-slate-500">{{ data_get($consultation, 'age', '-') }} tahun</p>
                             </td>
-                            <td class="px-5 py-4 text-slate-700">{{ data_get($consultation, 'primary_result.disorder.name', data_get($consultation, 'primary_result.name', '-')) }}</td>
-                            <td class="px-5 py-4 text-slate-700">{{ data_get($consultation, 'primary_result.belief', data_get($consultation, 'confidence', '-')) }}</td>
+                            <td class="px-5 py-4 text-slate-700">{{ data_get($consultation, 'display_result_name') ?: data_get($consultation, 'primary_result.disorder.name', data_get($consultation, 'primary_result.name', '-')) }}</td>
+                            <td class="px-5 py-4 text-slate-700">{{ $formatPercent($belief) }}</td>
                             <td class="px-5 py-4 text-slate-700">{{ data_get($consultation, 'symptoms_count', collect(data_get($consultation, 'symptoms', []))->count()) }}</td>
                             <td class="px-5 py-4 text-slate-700">{{ data_get($consultation, 'created_at', '-') }}</td>
                             <td class="px-5 py-4">

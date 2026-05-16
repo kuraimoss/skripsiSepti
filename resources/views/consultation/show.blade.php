@@ -25,18 +25,24 @@
 
     $results = collect($results ?? data_get($consultation ?? null, 'results', []));
     $primaryResult = $primaryResult ?? data_get($consultation ?? null, 'primary_result') ?? $results->first();
-    $primaryName = data_get($primaryResult, 'disorder.name', data_get($primaryResult, 'name', 'Hasil belum tersedia'));
-    $confidence = data_get($primaryResult, 'belief', data_get($primaryResult, 'confidence', data_get($primaryResult, 'percentage', 0)));
+    $primaryName = data_get($consultation ?? null, 'display_result_name')
+        ?: data_get($primaryResult, 'disorder.name', data_get($primaryResult, 'name', 'Hasil belum tersedia'));
+    $confidence = data_get($consultation ?? null, 'display_confidence_percentage');
+    $confidence = $confidence ?? data_get($primaryResult, 'belief', data_get($primaryResult, 'confidence', data_get($primaryResult, 'percentage', 0)));
+    $confidenceScore = (float) $confidence;
+    if ($confidenceScore > 1 && $confidenceScore <= 100) {
+        $confidenceScore = $confidenceScore / 100;
+    }
     $selectedSymptoms = collect($selectedSymptoms ?? data_get($consultation ?? null, 'symptoms', []));
     $consultationId = data_get($consultation ?? null, 'id');
     $createdAt = data_get($consultation ?? null, 'created_at');
     $createdLabel = $createdAt instanceof \DateTimeInterface ? $createdAt->format('d/m/Y H:i') : ($createdAt ?: date('d/m/Y H:i'));
     $printUrl = \Illuminate\Support\Facades\Route::has('consultation.print') && filled($consultationId) ? route('consultation.print', $consultationId) : '#';
     $additionalNotes = data_get($consultation ?? null, 'additional_notes');
-    $certaintyLabel = data_get($consultation ?? null, 'certainty_label') ?: match (true) {
-        (float) $confidence >= 1.0 => 'Sangat Pasti',
-        (float) $confidence >= 0.75 => 'Pasti',
-        (float) $confidence >= 0.50 => 'Cukup Pasti',
+    $certaintyLabel = data_get($consultation ?? null, 'display_certainty_label') ?: match (true) {
+        $confidenceScore >= 1.0 => 'Sangat Pasti',
+        $confidenceScore >= 0.75 => 'Pasti',
+        $confidenceScore >= 0.50 => 'Cukup Pasti',
         default => 'Kurang Pasti',
     };
 @endphp
