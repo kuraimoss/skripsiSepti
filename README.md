@@ -4,14 +4,14 @@ Aplikasi web Laravel untuk deteksi awal gangguan kesehatan mental remaja akibat 
 
 ## Stack Project
 
-- PHP 8.3 atau lebih baru
-- Laravel 13
+- PHP 8.1.6
+- Laravel 10
 - MySQL via XAMPP
 - Composer
 - Node.js dan npm
 - Vite 8
 - Tailwind CSS 4
-- PHPUnit 12
+- PHPUnit 10
 
 Database yang dipakai project ini hanya MySQL.
 
@@ -37,19 +37,19 @@ composer install
 npm install
 ```
 
-Jika memakai PHP lokal yang ada di workspace ini, perintah artisan dapat dijalankan dengan:
+Pastikan PHP yang aktif di CMD adalah PHP 8.1.6.
 
 ```cmd
-.\.tools\php-8.5.5\php.exe artisan --version
+php -v
 ```
 
-Jika PHP sudah terpasang di sistem atau dari XAMPP, cukup gunakan:
+Jika versi PHP sudah benar, cek artisan dengan:
 
 ```cmd
 php artisan --version
 ```
 
-Pada panduan berikutnya, perintah ditulis memakai `php artisan`. Jika di komputer memakai PHP lokal project, ganti `php` dengan `.\.tools\php-8.5.5\php.exe`.
+Project ini mengunci dependency Composer untuk platform PHP 8.1.6, jadi `composer install` akan memakai versi package yang cocok dengan PHP tersebut.
 
 ## Konfigurasi Environment
 

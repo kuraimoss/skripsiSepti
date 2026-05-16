@@ -2,13 +2,16 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-#[Fillable(['rule_code', 'mental_disorder_id', 'symptom_id', 'belief'])]
 class KnowledgeRule extends Model
 {
+    /**
+     * @var array<int, string>
+     */
+    protected $fillable = ['rule_code', 'mental_disorder_id', 'symptom_id', 'belief'];
+
     /**
      * Function ini digunakan untuk menentukan tipe data otomatis
      * pada atribut aturan basis pengetahuan.

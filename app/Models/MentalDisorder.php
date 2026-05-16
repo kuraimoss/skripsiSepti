@@ -2,14 +2,17 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-#[Fillable(['code', 'name', 'scientific_name', 'description', 'solution'])]
 class MentalDisorder extends Model
 {
+    /**
+     * @var array<int, string>
+     */
+    protected $fillable = ['code', 'name', 'scientific_name', 'description', 'solution'];
+
     /**
      * Function ini digunakan untuk mengambil aturan basis pengetahuan
      * yang dimiliki oleh satu gangguan.

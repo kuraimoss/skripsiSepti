@@ -2,14 +2,17 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-#[Fillable(['code', 'name', 'belief', 'description'])]
 class Symptom extends Model
 {
+    /**
+     * @var array<int, string>
+     */
+    protected $fillable = ['code', 'name', 'belief', 'description'];
+
     /**
      * Function ini digunakan untuk menentukan tipe data otomatis
      * pada atribut gejala.

@@ -614,15 +614,15 @@ class ConsultationController extends Controller
      */
     private function resolveDisorderId(mixed $disorder): mixed
     {
-        if ($disorder === null || is_numeric($disorder)) {
-            return $disorder;
-        }
+        $reference = $this->sanitizeDisorderReference($disorder);
 
-        $code = trim((string) $disorder);
+        if ($reference === null || is_numeric($reference)) {
+            return $reference;
+        }
 
         foreach ([MentalDisorder::class, Disorder::class] as $modelClass) {
             if (class_exists($modelClass)) {
-                $id = $modelClass::query()->where('code', $code)->value('id');
+                $id = $modelClass::query()->where('code', $reference)->value('id');
 
                 if ($id !== null) {
                     return $id;
@@ -630,7 +630,30 @@ class ConsultationController extends Controller
             }
         }
 
-        return $disorder;
+        return null;
+    }
+
+    /**
+     * Function ini digunakan untuk menyaring referensi hasil diagnosis
+     * agar hanya satu kode gangguan valid yang boleh diproses ke foreign key.
+     */
+    private function sanitizeDisorderReference(mixed $disorder): int|string|null
+    {
+        if ($disorder === null || is_numeric($disorder)) {
+            return $disorder;
+        }
+
+        $reference = trim((string) $disorder);
+
+        if ($reference === '' || strcasecmp($reference, 'Theta') === 0) {
+            return null;
+        }
+
+        if (str_contains($reference, ',') || str_contains($reference, '|')) {
+            return null;
+        }
+
+        return $reference;
     }
 
     /**

@@ -2,13 +2,16 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-#[Fillable(['consultation_id', 'symptom_id', 'belief', 'selected', 'sort_order'])]
 class ConsultationSymptom extends Model
 {
+    /**
+     * @var array<int, string>
+     */
+    protected $fillable = ['consultation_id', 'symptom_id', 'belief', 'selected', 'sort_order'];
+
     /**
      * Function ini digunakan untuk menentukan tipe data otomatis
      * pada atribut gejala konsultasi.

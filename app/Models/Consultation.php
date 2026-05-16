@@ -2,31 +2,34 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-#[Fillable([
-    'code',
-    'user_id',
-    'respondent_name',
-    'respondent_age',
-    'respondent_gender',
-    'respondent_address',
-    'respondent_phone',
-    'started_at',
-    'completed_at',
-    'detected_mental_disorder_id',
-    'confidence_score',
-    'confidence_percentage',
-    'certainty_label',
-    'mass_values',
-    'notes',
-])]
 class Consultation extends Model
 {
+    /**
+     * @var array<int, string>
+     */
+    protected $fillable = [
+        'code',
+        'user_id',
+        'respondent_name',
+        'respondent_age',
+        'respondent_gender',
+        'respondent_address',
+        'respondent_phone',
+        'started_at',
+        'completed_at',
+        'detected_mental_disorder_id',
+        'confidence_score',
+        'confidence_percentage',
+        'certainty_label',
+        'mass_values',
+        'notes',
+    ];
+
     /**
      * Function ini digunakan untuk menentukan tipe data otomatis
      * pada atribut konsultasi saat dibaca dari database.
