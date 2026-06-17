@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\ConsultationController as AdminConsultationController;
 use App\Http\Controllers\Admin\DisorderController;
 use App\Http\Controllers\Admin\KnowledgeRuleController;
+use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Admin\SymptomController;
 use App\Http\Controllers\Auth\AdminLoginController;
 use App\Http\Controllers\ConsultationController;
@@ -93,6 +94,9 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
             'topDisorders' => $topDisorders,
         ]);
     })->name('dashboard');
+
+    Route::get('profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::put('profile', [ProfileController::class, 'update'])->name('profile.update');
 
     Route::resource('symptoms', SymptomController::class);
     Route::resource('disorders', DisorderController::class);

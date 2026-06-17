@@ -9,6 +9,7 @@ use App\Models\User;
 use App\Services\DempsterShaferService;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Schema;
 use Tests\TestCase;
@@ -152,6 +153,66 @@ class ExpertSystemWorkflowTest extends TestCase
         $this->actingAs($user)
             ->get($route)
             ->assertForbidden();
+    }
+
+    /**
+     * Function ini digunakan untuk memastikan admin dapat mengubah
+     * email dan password akun yang sedang digunakan.
+     */
+    public function test_admin_can_update_own_profile(): void
+    {
+        $this->skipUnlessRoutesExist([
+            'admin.profile.edit',
+            'admin.profile.update',
+        ]);
+
+        $admin = $this->adminUser();
+
+        $this->actingAs($admin)
+            ->get(route('admin.profile.edit'))
+            ->assertOk()
+            ->assertSee($admin->email);
+
+        $response = $this->actingAs($admin)->put(route('admin.profile.update'), [
+            'email' => 'admin-baru@example.com',
+            'current_password' => 'password',
+            'password' => 'password-baru',
+            'password_confirmation' => 'password-baru',
+        ]);
+
+        $response->assertSessionHasNoErrors();
+        $response->assertRedirect(route('admin.profile.edit'));
+
+        $admin->refresh();
+
+        $this->assertSame('admin-baru@example.com', $admin->email);
+        $this->assertTrue(Hash::check('password-baru', $admin->password));
+    }
+
+    /**
+     * Function ini digunakan untuk memastikan password saat ini
+     * wajib benar sebelum akun admin dapat diperbarui.
+     */
+    public function test_admin_profile_update_requires_current_password(): void
+    {
+        $this->skipUnlessRoutesExist([
+            'admin.profile.update',
+        ]);
+
+        $admin = $this->adminUser();
+
+        $response = $this->actingAs($admin)->from(route('admin.profile.edit'))->put(route('admin.profile.update'), [
+            'email' => 'admin-gagal@example.com',
+            'current_password' => 'password-salah',
+            'password' => 'password-baru',
+            'password_confirmation' => 'password-baru',
+        ]);
+
+        $response->assertRedirect(route('admin.profile.edit'));
+        $response->assertSessionHasErrors('current_password');
+
+        $this->assertSame('admin@example.com', $admin->refresh()->email);
+        $this->assertTrue(Hash::check('password', $admin->password));
     }
 
     /**
@@ -445,7 +506,7 @@ class ExpertSystemWorkflowTest extends TestCase
     private function exampleSymptomIds(): array
     {
         if (Schema::hasTable('symptoms')) {
-            $ids = DB::table('symptoms')->orderBy('id')->limit(3)->pluck('id')->all();
+            $ids = DB::table('symptoms')->orderBy('id')->limit(4)->pluck('id')->all();
 
             $this->assertNotEmpty($ids, 'Seeder harus menyediakan minimal satu data symptoms untuk konsultasi.');
 
@@ -456,6 +517,7 @@ class ExpertSystemWorkflowTest extends TestCase
             'sleep_disturbance',
             'irritability',
             'family_conflict_stress',
+            'low_confidence',
         ];
     }
 
@@ -475,7 +537,7 @@ class ExpertSystemWorkflowTest extends TestCase
             'description' => 'Gejala gangguan tidur yang muncul setelah tekanan dari lingkungan keluarga.',
             'weight' => 0.7,
             'belief' => 0.7,
-            'plausibility' => 0.3,
+
             'is_active' => true,
         ], $overrides);
     }

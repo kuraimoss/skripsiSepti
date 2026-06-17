@@ -40,9 +40,9 @@
     $printUrl = \Illuminate\Support\Facades\Route::has('consultation.print') && filled($consultationId) ? route('consultation.print', $consultationId) : '#';
     $additionalNotes = data_get($consultation ?? null, 'additional_notes');
     $certaintyLabel = data_get($consultation ?? null, 'display_certainty_label') ?: match (true) {
-        $confidenceScore >= 1.0 => 'Sangat Pasti',
-        $confidenceScore >= 0.75 => 'Pasti',
-        $confidenceScore >= 0.50 => 'Cukup Pasti',
+        $confidenceScore >= 0.90 => 'Sangat Pasti',
+        $confidenceScore >= 0.80 => 'Pasti',
+        $confidenceScore >= 0.70 => 'Cukup Pasti',
         default => 'Kurang Pasti',
     };
 @endphp

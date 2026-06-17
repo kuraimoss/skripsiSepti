@@ -29,9 +29,9 @@
         $confidenceScore = $confidenceScore / 100;
     }
     $certaintyLabel = data_get($consultation ?? null, 'display_certainty_label') ?: match (true) {
-        $confidenceScore >= 1.0 => 'Sangat Pasti',
-        $confidenceScore >= 0.75 => 'Pasti',
-        $confidenceScore >= 0.50 => 'Cukup Pasti',
+        $confidenceScore >= 0.90 => 'Sangat Pasti',
+        $confidenceScore >= 0.80 => 'Pasti',
+        $confidenceScore >= 0.70 => 'Cukup Pasti',
         default => 'Kurang Pasti',
     };
 @endphp
@@ -115,7 +115,7 @@
                             <tr>
                                 <th class="px-4 py-3 text-left font-semibold">Gangguan</th>
                                 <th class="px-4 py-3 text-left font-semibold">Belief</th>
-                                <th class="px-4 py-3 text-left font-semibold">Plausibility</th>
+
                             </tr>
                         </thead>
                         <tbody class="divide-y divide-slate-200">
@@ -123,10 +123,10 @@
                                 <tr>
                                     <td class="px-4 py-3">{{ data_get($result, 'disorder.name', data_get($result, 'name', '-')) }}</td>
                                     <td class="px-4 py-3">{{ $formatPercent(data_get($result, 'belief', data_get($result, 'confidence', data_get($result, 'percentage', 0)))) }}</td>
-                                    <td class="px-4 py-3">{{ data_get($result, 'plausibility') !== null ? $formatPercent(data_get($result, 'plausibility')) : '-' }}</td>
+
                                 </tr>
                             @empty
-                                <tr><td colspan="3" class="px-4 py-4 text-slate-500">Detail hasil belum tersedia.</td></tr>
+                                <tr><td colspan="2" class="px-4 py-4 text-slate-500">Detail hasil belum tersedia.</td></tr>
                             @endforelse
                         </tbody>
                     </table>

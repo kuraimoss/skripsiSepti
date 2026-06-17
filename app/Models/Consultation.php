@@ -457,9 +457,9 @@ class Consultation extends Model
     private function certaintyLabelFromScore(float $score): string
     {
         return match (true) {
-            $score >= 1.0 => 'Sangat Pasti',
-            $score >= 0.75 => 'Pasti',
-            $score >= 0.50 => 'Cukup Pasti',
+            $score >= 0.90 => 'Sangat Pasti',
+            $score >= 0.80 => 'Pasti',
+            $score >= 0.70 => 'Cukup Pasti',
             default => 'Kurang Pasti',
         };
     }

@@ -47,18 +47,11 @@
         </div>
     </div>
 
-    <div class="grid gap-4 md:grid-cols-2">
-        <div>
-            <label for="belief" class="block text-sm font-semibold text-slate-700">Belief</label>
-            <input id="belief" name="belief" value="{{ old('belief', data_get($rule, 'belief')) }}" type="number" step="0.01" min="0" max="1" class="mt-2 block w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-sm shadow-sm focus:border-teal-600 focus:ring-2 focus:ring-teal-600/20" placeholder="0.60">
-            @error('belief') <p class="mt-2 text-sm text-rose-700">{{ $message }}</p> @enderror
-        </div>
-
-        <div>
-            <label for="plausibility" class="block text-sm font-semibold text-slate-700">Plausibility</label>
-            <input id="plausibility" name="plausibility" value="{{ old('plausibility', data_get($rule, 'plausibility')) }}" type="number" step="0.01" min="0" max="1" class="mt-2 block w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-sm shadow-sm focus:border-teal-600 focus:ring-2 focus:ring-teal-600/20" placeholder="Opsional">
-            @error('plausibility') <p class="mt-2 text-sm text-rose-700">{{ $message }}</p> @enderror
-        </div>
+    <div>
+        <label for="belief" class="block text-sm font-semibold text-slate-700">Belief</label>
+        <input id="belief" name="belief" value="{{ old('belief', data_get($rule, 'belief')) }}" type="number" step="0.01" min="0.1" max="1" class="mt-2 block w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-sm shadow-sm focus:border-teal-600 focus:ring-2 focus:ring-teal-600/20" placeholder="0.60">
+        <p class="mt-2 text-xs leading-5 text-slate-500">Nilai belief hanya boleh dari 0.1 sampai 1.</p>
+        @error('belief') <p class="mt-2 text-sm text-rose-700">{{ $message }}</p> @enderror
     </div>
 
     <div>

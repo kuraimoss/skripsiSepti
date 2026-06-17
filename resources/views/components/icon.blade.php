@@ -113,6 +113,12 @@
             <path d="M15 12H3" />
             @break
 
+        @case('log-out')
+            <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
+            <path d="M16 17l5-5-5-5" />
+            <path d="M21 12H9" />
+            @break
+
         @case('network')
             <rect width="6" height="6" x="3" y="3" rx="1" />
             <rect width="6" height="6" x="15" y="3" rx="1" />

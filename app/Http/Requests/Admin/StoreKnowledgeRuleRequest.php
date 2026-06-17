@@ -44,7 +44,7 @@ class StoreKnowledgeRuleRequest extends FormRequest
                 Rule::unique('knowledge_rules', 'symptom_id')->where(fn ($query) => $query
                     ->where('mental_disorder_id', $this->input('mental_disorder_id'))),
             ],
-            'belief' => ['required', 'numeric', 'min:0', 'max:1'],
+            'belief' => ['required', 'numeric', 'min:0.1', 'max:1'],
         ];
     }
 }

@@ -22,7 +22,7 @@
 
         <div>
             <label for="belief" class="block text-sm font-semibold text-slate-700">Nilai belief</label>
-            <input id="belief" name="belief" value="{{ old('belief', data_get($symptom, 'belief')) }}" type="number" step="0.01" min="0" max="1" class="mt-2 block w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-sm shadow-sm focus:border-teal-600 focus:ring-2 focus:ring-teal-600/20" placeholder="0.40">
+            <input id="belief" name="belief" value="{{ old('belief', data_get($symptom, 'belief')) }}" type="number" step="0.01" min="0.1" max="1" class="mt-2 block w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-sm shadow-sm focus:border-teal-600 focus:ring-2 focus:ring-teal-600/20" placeholder="0.40">
             @error('belief') <p class="mt-2 text-sm text-rose-700">{{ $message }}</p> @enderror
         </div>
     </div>
@@ -41,7 +41,7 @@
 
     <div class="grid gap-4 md:grid-cols-2">
         <p class="rounded-md border border-amber-200 bg-amber-50 px-3 py-2 text-sm leading-6 text-amber-900 md:col-span-2">
-            Nilai belief mengikuti rentang 0 sampai 1. Data awal dari dokumen memakai contoh 0.2 sampai 0.8.
+            Nilai belief mengikuti rentang 0.1 sampai 1. Data awal dari dokumen memakai contoh 0.2 sampai 0.8.
         </p>
     </div>
 

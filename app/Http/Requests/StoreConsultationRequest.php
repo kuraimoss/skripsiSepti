@@ -23,6 +23,7 @@ class StoreConsultationRequest extends FormRequest
     protected function prepareForValidation(): void
     {
         $symptoms = $this->input('symptoms', $this->input('gejala', $this->input('symptom_ids')));
+        $phone = $this->input('phone', $this->input('telepon', $this->input('telephone', $this->input('no_hp'))));
 
         if (is_string($symptoms)) {
             $symptoms = array_values(array_filter(array_map('trim', explode(',', $symptoms))));
@@ -33,7 +34,7 @@ class StoreConsultationRequest extends FormRequest
             'age' => $this->input('age', $this->input('umur', $this->input('respondent_age'))),
             'gender' => $this->normalizeGender($this->input('gender', $this->input('kelamin', $this->input('jenis_kelamin')))),
             'address' => $this->input('address', $this->input('alamat')),
-            'phone' => $this->input('phone', $this->input('telepon', $this->input('telephone', $this->input('no_hp')))),
+            'phone' => is_string($phone) ? trim($phone) : $phone,
             'school' => $this->input('school', $this->input('sekolah')),
             'parent_guardian' => $this->input('parent_guardian', $this->input('wali')),
             'family_stressor' => $this->input('family_stressor', $this->input('pemicu_stres')),
@@ -55,12 +56,12 @@ class StoreConsultationRequest extends FormRequest
             'age' => ['nullable', 'integer', 'min:10', 'max:24'],
             'gender' => ['required', 'string', Rule::in(['laki-laki', 'perempuan'])],
             'address' => ['nullable', 'string', 'max:500'],
-            'phone' => ['nullable', 'string', 'max:30', 'regex:/^[0-9+\-\s().]+$/'],
+            'phone' => ['nullable', 'string', 'digits_between:10,12'],
             'school' => ['nullable', 'string', 'max:150'],
             'parent_guardian' => ['nullable', 'string', 'max:100'],
             'family_stressor' => ['nullable', 'string', Rule::in(['konflik', 'komunikasi', 'ekonomi', 'pengasuhan'])],
             'notes' => ['nullable', 'string', 'max:1000'],
-            'symptoms' => ['required', 'array', 'min:1'],
+            'symptoms' => ['required', 'array', 'min:4'],
             'symptoms.*' => ['bail', 'integer', 'distinct', 'exists:symptoms,id'],
         ];
     }
@@ -99,9 +100,9 @@ class StoreConsultationRequest extends FormRequest
         return [
             'gender.in' => 'Jenis kelamin harus laki-laki atau perempuan.',
             'family_stressor.in' => 'Pemicu stres tidak valid.',
-            'phone.regex' => 'Telepon hanya boleh berisi angka, spasi, dan simbol + - ( ).',
-            'symptoms.min' => 'Pilih minimal satu gejala.',
-            'symptoms.required' => 'Pilih minimal satu gejala.',
+            'phone.digits_between' => 'Nomor telepon hanya boleh angka dan harus berisi 10 sampai 12 digit.',
+            'symptoms.min' => 'Gejala yang dipilih masih kurang. Pilih minimal 4 gejala agar hasil deteksi lebih akurat.',
+            'symptoms.required' => 'Pilih minimal 4 gejala agar hasil deteksi lebih akurat.',
         ];
     }
 

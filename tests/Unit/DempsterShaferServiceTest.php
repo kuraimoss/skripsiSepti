@@ -23,8 +23,8 @@ class DempsterShaferServiceTest extends TestCase
         $this->assertEqualsWithDelta(0.976, $result['belief'], 0.000001);
         $this->assertSame(97.6, $result['percentage']);
         $this->assertSame('97.6%', $result['percentage_text']);
-        $this->assertSame('Pasti', $result['certainty']);
-        $this->assertSame('Pasti', $result['certainty_label']);
+        $this->assertSame('Sangat Pasti', $result['certainty']);
+        $this->assertSame('Sangat Pasti', $result['certainty_label']);
         $this->assertSame(['P02' => 0.976, 'Theta' => 0.024], $result['masses']);
         $this->assertCount(4, $result['steps']);
         $this->assertSame(['G01', 'G03', 'G08', 'G11'], array_column($result['selected_symptoms'], 'code'));
@@ -60,7 +60,7 @@ class DempsterShaferServiceTest extends TestCase
         $this->assertSame(0.5, $result['belief']);
         $this->assertSame(50.0, $result['percentage']);
         $this->assertSame('50%', $result['percentage_text']);
-        $this->assertSame('Cukup Pasti', $result['certainty_label']);
+        $this->assertSame('Kurang Pasti', $result['certainty_label']);
         $this->assertSame(['P01,P02' => 0.5, 'Theta' => 0.5], $result['masses']);
     }
 

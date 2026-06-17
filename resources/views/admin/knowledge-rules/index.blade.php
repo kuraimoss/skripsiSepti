@@ -39,7 +39,7 @@
                         <th class="px-5 py-3 text-left font-semibold text-slate-600">Gejala</th>
                         <th class="px-5 py-3 text-left font-semibold text-slate-600">Gangguan</th>
                         <th class="px-5 py-3 text-left font-semibold text-slate-600">Belief</th>
-                        <th class="px-5 py-3 text-left font-semibold text-slate-600">Plausibility</th>
+
                         <th class="px-5 py-3 text-left font-semibold text-slate-600">Status</th>
                         <th class="px-5 py-3 text-right font-semibold text-slate-600">Aksi</th>
                     </tr>
@@ -61,7 +61,7 @@
                                 <p class="mt-1 text-xs text-slate-500">{{ data_get($rule, 'mentalDisorder.name', data_get($rule, 'disorder.name', '-')) }}</p>
                             </td>
                             <td class="px-5 py-4 text-slate-700">{{ data_get($rule, 'belief', '-') }}</td>
-                            <td class="px-5 py-4 text-slate-700">{{ data_get($rule, 'plausibility', '-') }}</td>
+
                             <td class="px-5 py-4">
                                 <span class="rounded-md bg-slate-100 px-2.5 py-1 text-xs font-semibold text-slate-700">{{ data_get($rule, 'is_active', true) ? 'Aktif' : 'Nonaktif' }}</span>
                             </td>
@@ -84,7 +84,7 @@
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="6" class="px-5 py-10 text-center">
+                            <td colspan="5" class="px-5 py-10 text-center">
                                 <p class="text-sm font-semibold text-slate-900">Belum ada aturan basis pengetahuan.</p>
                                 <p class="mt-1 text-sm text-slate-500">Tambahkan relasi gejala dan gangguan untuk menghitung belief.</p>
                             </td>

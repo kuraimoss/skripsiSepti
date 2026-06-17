@@ -7,6 +7,7 @@
         ['label' => 'Gangguan', 'route' => 'admin.disorders.index', 'icon' => 'brain'],
         ['label' => 'Basis Pengetahuan', 'route' => 'admin.knowledge-rules.index', 'icon' => 'network'],
         ['label' => 'Konsultasi', 'route' => 'admin.consultations.index', 'icon' => 'history'],
+        ['label' => 'Profil Admin', 'route' => 'admin.profile.edit', 'icon' => 'user-round'],
     ];
 @endphp
 
@@ -50,6 +51,20 @@
                         </a>
                     @endforeach
                 </nav>
+
+                <div class="no-print px-4 pb-4 lg:absolute lg:bottom-0 lg:left-0 lg:right-0 lg:bg-slate-50 lg:pt-4">
+                    <div class="mb-3 rounded-md border border-slate-200 bg-white px-3 py-2">
+                        <p class="truncate text-sm font-semibold text-slate-800">{{ auth()->user()?->name ?? 'Admin' }}</p>
+                        <p class="truncate text-xs text-slate-500">{{ auth()->user()?->email }}</p>
+                    </div>
+                    <form method="POST" action="{{ \Illuminate\Support\Facades\Route::has('logout') ? route('logout') : '#' }}">
+                        @csrf
+                        <button type="submit" class="inline-flex w-full items-center justify-center gap-2 rounded-md border border-rose-200 bg-white px-3 py-2 text-sm font-semibold text-rose-700 transition hover:bg-rose-50">
+                            <x-icon name="log-out" class="size-4" />
+                            Logout
+                        </button>
+                    </form>
+                </div>
             </aside>
 
             <div class="min-w-0 flex-1 lg:pl-72">

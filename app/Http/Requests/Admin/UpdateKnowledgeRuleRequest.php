@@ -46,7 +46,7 @@ class UpdateKnowledgeRuleRequest extends FormRequest
                     ->where(fn ($query) => $query->where('mental_disorder_id', $this->input('mental_disorder_id')))
                     ->ignore($this->routeKey('knowledge_rule')),
             ],
-            'belief' => ['required', 'numeric', 'min:0', 'max:1'],
+            'belief' => ['required', 'numeric', 'min:0.1', 'max:1'],
         ];
     }
 

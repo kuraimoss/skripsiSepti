@@ -534,9 +534,9 @@ class DempsterShaferService
     private function certaintyLabel(float $belief): string
     {
         return match (true) {
-            $belief >= 1.0 => 'Sangat Pasti',
-            $belief >= 0.75 => 'Pasti',
-            $belief >= 0.50 => 'Cukup Pasti',
+            $belief >= 0.90 => 'Sangat Pasti',
+            $belief >= 0.80 => 'Pasti',
+            $belief >= 0.70 => 'Cukup Pasti',
             default => 'Kurang Pasti',
         };
     }

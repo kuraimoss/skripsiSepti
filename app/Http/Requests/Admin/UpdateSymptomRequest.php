@@ -37,7 +37,7 @@ class UpdateSymptomRequest extends FormRequest
         return [
             'code' => ['required', 'string', 'max:50', Rule::unique('symptoms', 'code')->ignore($this->routeKey('symptom'))],
             'name' => ['required', 'string', 'max:255'],
-            'belief' => ['required', 'numeric', 'min:0', 'max:1'],
+            'belief' => ['required', 'numeric', 'min:0.1', 'max:1'],
             'description' => ['nullable', 'string'],
         ];
     }
