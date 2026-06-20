@@ -37,6 +37,11 @@
                     <x-icon name="log-in" class="size-4" />
                     Masuk Admin
                 </button>
+
+                <a href="{{ route('home') }}" class="mt-3 inline-flex w-full items-center justify-center gap-2 rounded-md border border-slate-300 bg-white px-4 py-3 text-sm font-semibold text-slate-700 transition hover:bg-slate-100">
+                    <x-icon name="arrow-right" class="size-4 rotate-180" />
+                    Batal Login
+                </a>
             </form>
         </div>
     </section>

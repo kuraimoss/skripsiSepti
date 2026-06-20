@@ -23,6 +23,7 @@ class StoreConsultationRequest extends FormRequest
     protected function prepareForValidation(): void
     {
         $symptoms = $this->input('symptoms', $this->input('gejala', $this->input('symptom_ids')));
+        $age = $this->input('age', $this->input('umur', $this->input('respondent_age')));
         $phone = $this->input('phone', $this->input('telepon', $this->input('telephone', $this->input('no_hp'))));
 
         if (is_string($symptoms)) {
@@ -31,7 +32,7 @@ class StoreConsultationRequest extends FormRequest
 
         $this->merge([
             'name' => $this->input('name', $this->input('nama', $this->input('patient_name'))),
-            'age' => $this->input('age', $this->input('umur', $this->input('respondent_age'))),
+            'age' => is_string($age) ? trim($age) : $age,
             'gender' => $this->normalizeGender($this->input('gender', $this->input('kelamin', $this->input('jenis_kelamin')))),
             'address' => $this->input('address', $this->input('alamat')),
             'phone' => is_string($phone) ? trim($phone) : $phone,
@@ -53,7 +54,7 @@ class StoreConsultationRequest extends FormRequest
     {
         return [
             'name' => ['required', 'string', 'max:100'],
-            'age' => ['nullable', 'integer', 'min:10', 'max:24'],
+            'age' => ['nullable', 'regex:/^[0-9]+$/', 'integer', 'min:10', 'max:24'],
             'gender' => ['required', 'string', Rule::in(['laki-laki', 'perempuan'])],
             'address' => ['nullable', 'string', 'max:500'],
             'phone' => ['nullable', 'string', 'digits_between:10,12'],
@@ -100,6 +101,7 @@ class StoreConsultationRequest extends FormRequest
         return [
             'gender.in' => 'Jenis kelamin harus laki-laki atau perempuan.',
             'family_stressor.in' => 'Pemicu stres tidak valid.',
+            'age.regex' => 'Usia hanya boleh berisi angka.',
             'phone.digits_between' => 'Nomor telepon hanya boleh angka dan harus berisi 10 sampai 12 digit.',
             'symptoms.min' => 'Gejala yang dipilih masih kurang. Pilih minimal 4 gejala agar hasil deteksi lebih akurat.',
             'symptoms.required' => 'Pilih minimal 4 gejala agar hasil deteksi lebih akurat.',

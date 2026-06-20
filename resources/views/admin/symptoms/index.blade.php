@@ -8,6 +8,7 @@
     $symptomItems = is_object($symptoms ?? null) && method_exists($symptoms, 'items') ? collect($symptoms->items()) : collect($symptoms ?? []);
     $indexUrl = \Illuminate\Support\Facades\Route::has('admin.symptoms.index') ? route('admin.symptoms.index') : '#';
     $createUrl = \Illuminate\Support\Facades\Route::has('admin.symptoms.create') ? route('admin.symptoms.create') : '#';
+    $formatBelief = fn ($value) => is_numeric($value) ? rtrim(rtrim(number_format((float) $value, 4, '.', ''), '0'), '.') : '-';
 @endphp
 
 @section('header_actions')
@@ -55,7 +56,7 @@
                                 @endif
                             </td>
                             <td class="px-5 py-4 text-slate-600">{{ \Illuminate\Support\Str::limit(data_get($symptom, 'description', '-'), 80) }}</td>
-                            <td class="px-5 py-4 text-slate-600">{{ data_get($symptom, 'belief', '-') }}</td>
+                            <td class="px-5 py-4 text-slate-600">{{ $formatBelief(data_get($symptom, 'belief')) }}</td>
                             <td class="px-5 py-4">
                                 <div class="flex justify-end gap-2">
                                     <a href="{{ $editUrl }}" class="inline-flex items-center gap-1.5 rounded-md border border-slate-300 px-3 py-1.5 text-xs font-semibold text-slate-700 transition hover:bg-slate-100">

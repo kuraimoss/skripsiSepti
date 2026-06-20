@@ -8,6 +8,7 @@
     $ruleItems = is_object($rules ?? null) && method_exists($rules, 'items') ? collect($rules->items()) : collect($rules ?? []);
     $indexUrl = \Illuminate\Support\Facades\Route::has('admin.knowledge-rules.index') ? route('admin.knowledge-rules.index') : '#';
     $createUrl = \Illuminate\Support\Facades\Route::has('admin.knowledge-rules.create') ? route('admin.knowledge-rules.create') : '#';
+    $formatBelief = fn ($value) => is_numeric($value) ? rtrim(rtrim(number_format((float) $value, 4, '.', ''), '0'), '.') : '-';
 @endphp
 
 @section('header_actions')
@@ -60,7 +61,7 @@
                                 <p class="font-semibold text-slate-950">{{ data_get($rule, 'mentalDisorder.code', data_get($rule, 'disorder.code', '-')) }}</p>
                                 <p class="mt-1 text-xs text-slate-500">{{ data_get($rule, 'mentalDisorder.name', data_get($rule, 'disorder.name', '-')) }}</p>
                             </td>
-                            <td class="px-5 py-4 text-slate-700">{{ data_get($rule, 'belief', '-') }}</td>
+                            <td class="px-5 py-4 text-slate-700">{{ $formatBelief(data_get($rule, 'belief')) }}</td>
 
                             <td class="px-5 py-4">
                                 <span class="rounded-md bg-slate-100 px-2.5 py-1 text-xs font-semibold text-slate-700">{{ data_get($rule, 'is_active', true) ? 'Aktif' : 'Nonaktif' }}</span>

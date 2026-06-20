@@ -11,6 +11,10 @@
     </a>
 @endsection
 
+@php
+    $formatBelief = fn ($value) => is_numeric($value) ? rtrim(rtrim(number_format((float) $value, 4, '.', ''), '0'), '.') : '-';
+@endphp
+
 @section('content')
     <section class="rounded-lg border border-slate-200 bg-white p-5 shadow-sm">
         <h2 class="mb-5 flex items-center gap-2 text-base font-semibold text-slate-950">
@@ -24,7 +28,7 @@
             </div>
             <div>
                 <dt class="text-xs font-semibold uppercase tracking-wide text-slate-500">Belief</dt>
-                <dd class="mt-1 text-sm font-semibold text-slate-950">{{ $rule->belief }}</dd>
+                <dd class="mt-1 text-sm font-semibold text-slate-950">{{ $formatBelief($rule->belief) }}</dd>
             </div>
             <div>
                 <dt class="text-xs font-semibold uppercase tracking-wide text-slate-500">Gejala</dt>

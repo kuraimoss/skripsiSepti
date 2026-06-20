@@ -52,11 +52,12 @@
                             $showUrl = \Illuminate\Support\Facades\Route::has('admin.consultations.show') && filled($key) ? route('admin.consultations.show', $key) : '#';
                             $belief = data_get($consultation, 'display_confidence_percentage');
                             $belief = $belief ?? data_get($consultation, 'primary_result.belief', data_get($consultation, 'confidence', '-'));
+                            $age = data_get($consultation, 'age');
                         @endphp
                         <tr class="hover:bg-slate-50">
                             <td class="px-5 py-4">
                                 <p class="font-semibold text-slate-950">{{ data_get($consultation, 'patient_name', '-') }}</p>
-                                <p class="mt-1 text-xs text-slate-500">{{ data_get($consultation, 'age', '-') }} tahun</p>
+                                <p class="mt-1 text-xs text-slate-500">{{ filled($age) ? $age.' tahun' : 'Usia belum diisi' }}</p>
                             </td>
                             <td class="px-5 py-4 text-slate-700">{{ data_get($consultation, 'display_result_name') ?: data_get($consultation, 'primary_result.disorder.name', data_get($consultation, 'primary_result.name', '-')) }}</td>
                             <td class="px-5 py-4 text-slate-700">{{ $formatPercent($belief) }}</td>

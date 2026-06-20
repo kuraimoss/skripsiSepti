@@ -39,7 +39,7 @@
 
                         <div>
                             <label for="age" class="block text-sm font-semibold text-slate-700">Usia</label>
-                            <input id="age" name="age" value="{{ old('age') }}" type="number" inputmode="numeric" min="10" max="24" step="1" class="mt-2 block w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-sm text-slate-950 shadow-sm transition placeholder:text-slate-400 focus:border-teal-600 focus:ring-2 focus:ring-teal-600/20" placeholder="Contoh: 16">
+                            <input id="age" name="age" value="{{ old('age') }}" type="text" inputmode="numeric" pattern="[0-9]*" maxlength="2" data-digits-only class="mt-2 block w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-sm text-slate-950 shadow-sm transition placeholder:text-slate-400 focus:border-teal-600 focus:ring-2 focus:ring-teal-600/20" placeholder="Contoh: 16">
                             @error('age') <p class="mt-2 text-sm text-rose-700">{{ $message }}</p> @enderror
                         </div>
 
@@ -55,7 +55,7 @@
 
                         <div>
                             <label for="phone" class="block text-sm font-semibold text-slate-700">Telepon</label>
-                            <input id="phone" name="phone" value="{{ old('phone') }}" type="text" inputmode="numeric" pattern="[0-9]{10,12}" maxlength="12" class="mt-2 block w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-sm text-slate-950 shadow-sm transition placeholder:text-slate-400 focus:border-teal-600 focus:ring-2 focus:ring-teal-600/20" placeholder="Contoh: 08123456789">
+                            <input id="phone" name="phone" value="{{ old('phone') }}" type="text" inputmode="numeric" pattern="[0-9]{10,12}" maxlength="12" data-digits-only class="mt-2 block w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-sm text-slate-950 shadow-sm transition placeholder:text-slate-400 focus:border-teal-600 focus:ring-2 focus:ring-teal-600/20" placeholder="Contoh: 08123456789">
                             @error('phone') <p class="mt-2 text-sm text-rose-700">{{ $message }}</p> @enderror
                         </div>
 

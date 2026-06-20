@@ -25,7 +25,7 @@ class UpdateConsultationRequest extends FormRequest
             'patient_name' => ['required', 'string', 'max:100'],
             'gender' => ['required', 'string', 'max:25'],
             'address' => ['nullable', 'string', 'max:255'],
-            'phone' => ['nullable', 'string', 'max:55'],
+            'phone' => ['nullable', 'string', 'digits_between:10,12'],
             'symptom_ids' => ['required', 'array', 'min:1'],
             'symptom_ids.*' => ['integer', 'exists:symptoms,id'],
             'result_disorder_id' => ['nullable', 'integer', 'exists:disorders,id'],
